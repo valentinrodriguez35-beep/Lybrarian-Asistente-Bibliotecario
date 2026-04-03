@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@import "tailwind-animations";
+@plugin "tailwind-scrollbar";
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/*---> GLOBAL <---*/
+:root {
+  --background-home: #0a0a0a;
+  --background-chat: #0d0d0d;
+  --sidebar-color: #1b1b20;
+  /*Botones*/
+  --boton-icono: #d9d9d9;
+  --boton-icono_pressed: #ffffff;
+  --boton-bg-hover: #272a2d;
+  --boton-bg-pressed: #637aaa;
+  --boton-bg-pressed_innershadow: #393d41;
+  /*Tarjeta de resultado*/
+  --info-tarjeta-color: #1c1c24;
+  --info-tarjeta-hover: #26262f;
+  --info-tarjeta-pressed: #3a3a4a;
+  /*Mapa*/
+  --mapa-sidebar-color: #0b0c0c;
+  --mapa-boton-disponible: #86ff7b;
+  --mapa-boton-noDisponible: #ff7b7b;
+  /*Burbujas de mensajes*/
+  --user-mensaje: #1f5087;
+  --ai-mensaje: #272b30;
+  /*Caja de mensaje*/
+  --caja-mensaje: #141517;
+  --caja-mensaje-borderHover: var(--boton-bg-pressed);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Google Sans", sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #0a0a0a;
+}

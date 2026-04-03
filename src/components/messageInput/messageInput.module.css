@@ -1,0 +1,133 @@
+@import "tailwindcss";
+@plugin "tailwind-scrollbar";
+
+.chat_input_area {
+  height: auto;
+  width: 100%;
+  max-width: 40.625rem;
+}
+
+.txtField,
+.txtField::placeholder {
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.txtField {
+  background-color: var(--caja-mensaje);
+  resize: none;
+  border-style: solid;
+  border-color: transparent;
+  field-sizing: content;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  overflow-y: auto;
+  color: white;
+  border-radius: 1.5rem;
+  border-width: 1px;
+  min-height: 6rem;
+  width: 100%;
+  max-height: 12.5rem;
+  max-width: 100%;
+  padding: 0.625rem 1rem;
+  padding-right: 3rem;
+  padding-bottom: 3rem;
+  transition: ease-in;
+  transition-duration: 300ms;
+}
+
+.txtField::placeholder {
+  color: #868686;
+}
+
+.txtField:focus {
+  transition: ease-in;
+  transition-duration: 300ms;
+  outline: none;
+  border-color: var(--boton-bg-pressed);
+}
+.txtField:focus::placeholder {
+  color: #515151;
+}
+
+.txtField::-webkit-scrollbar-thumb {
+  background: #b9b9b9;
+  border-radius: 100vw;
+  height: 0.625rem;
+  max-height: 0.625rem;
+}
+
+.txtField::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.txtField::-webkit-scrollbar {
+  background: transparent;
+  width: 0.5rem;
+}
+
+.userInput {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.btnSend {
+  background-color: transparent;
+  border-color: transparent;
+  height: 3rem;
+  width: 3rem;
+}
+
+.btnIcon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  height: auto;
+  width: auto;
+  border-radius: 50%;
+  transition: ease-in;
+  transition-duration: 300ms;
+}
+
+.btnIcon img {
+  user-select: none;
+  width: auto;
+  height: auto;
+}
+
+.field_wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+
+.btnIcon img:hover {
+  cursor: pointer;
+}
+
+.btnIcon:hover {
+  cursor: pointer;
+  transition: ease-in;
+  transition-duration: 300ms;
+  background-color: var(--boton-bg-hover);
+}
+
+.disclaimer {
+  flex-direction: column;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding-bottom: 1rem;
+  padding-top: 0.625rem;
+  color: #9d9d9d;
+}
+
+.disclaimer a {
+  color: #97c8f0;
+}

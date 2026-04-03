@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+.app-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  transition: background-color 0.3s ease;
+}
+
+/* Manejo de fondos globales según el estado de la vista */
+.home-active {
+  background-color: var(--background-home);
+}
+
+.chat-active {
+  background-color: var(--background-chat);
+}
+
+.content-area {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-width: 40.625rem;
+  margin: 0 auto;
+  position: relative;
+}
+
+.input-footer {
+  width: 100%;
+  padding-bottom: 1.25rem;
+}

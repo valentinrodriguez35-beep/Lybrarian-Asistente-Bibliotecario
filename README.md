@@ -1,15 +1,27 @@
 # Lybrarian | Asistente Bibliotecario
 
+<<<<<<< HEAD
+
 #### Chatbot de asistencia para la consulta de disponibilidad física de material bibliográfico.
 
-<img width="992" height="426" alt="image" src="https://github.com/user-attachments/assets/80133528-1b8c-456f-aef8-9934e8e7b130" />
+=======
+
+#### Chatbot de asistencia para la consulta de disponibilidad física de material bibliográfico.
+
+> > > > > > > f8e759aed348d6a83d66409bd81a75b585ec5259
+> > > > > > > <img width="992" height="426" alt="image" src="https://github.com/user-attachments/assets/80133528-1b8c-456f-aef8-9934e8e7b130" />
 
 ## Descripcion
 
 ## Tecnologías Implementadas
 
-![Static Badge](https://img.shields.io/badge/Platform-blue?style=for-the-badge&logo=github&logoColor=%23181717&label=GitHub&labelColor=grey)
-![Static Badge](https://img.shields.io/badge/Build%20Tool-%239135FF?style=for-the-badge&logo=vite&logoColor=%239135FF&label=Vite%20JS&labelColor=grey)
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > f8e759aed348d6a83d66409bd81a75b585ec5259
+> > > > > > > ![Static Badge](https://img.shields.io/badge/Platform-blue?style=for-the-badge&logo=github&logoColor=%23181717&label=GitHub&labelColor=grey)
+> > > > > > > ![Static Badge](https://img.shields.io/badge/Build%20Tool-%239135FF?style=for-the-badge&logo=vite&logoColor=%239135FF&label=Vite%20JS&labelColor=grey)
 
 ![Static Badge](https://img.shields.io/badge/API-green?style=for-the-badge&logo=openstreetmap&logoColor=%237EBC6F&label=Open%20Street%20Map&labelColor=grey)
 ![Static Badge](https://img.shields.io/badge/API-orange?style=for-the-badge&logo=googlegemini&logoColor=white&label=Google%20Gemini&labelColor=grey)

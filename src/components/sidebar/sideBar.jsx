@@ -16,46 +16,46 @@ export default function sideBar() {
   return (
     <aside className="flex flex-col items-center w-35 h-dvh bg-(--sidebar-color) border-r border-r-gray-800">
       <nav className="flex flex-col justify-between h-full">
-        <div className="flex flex-col justify-center items-start gap-6 h-18">
+        <div className="flex flex-col pl-12 h-auto">
           <button
             type="button"
             className="bg-transparent border-none h-15 w-auto"
             onClick={() => handleClick("home")}
           >
-            <div className="flex flex-row items-center gap-4 h-12 w-auto cursor-pointer">
-              <HomeButton fill_col="lightblue" />
-              <text className="text-l font-medium text-gray-400">Inicio</text>
+            <div className="flex flex-row items-end gap-3 h-12 w-auto cursor-pointer">
+              <HomeButton fill_col="#66718a" />
+              <span className="text-l font-medium text-hover">Inicio</span>
+            </div>
+          </button>
+          <button
+            type="button"
+            className="bg-transparent border-none h-15 w-auto"
+            onClick={() => handleClick("map")}
+          >
+            <div className="flex flex-row items-end gap-3 h-12 w-auto cursor-pointer">
+              <MapButton fill_col="#66718a" />
+              <span className="text-l font-medium text-hover">Mapa</span>
             </div>
           </button>
         </div>
         <div className="flex flex-col justify-between gap-2 w-full h-auto p-10">
           <button
             type="button"
-            className="bg-transparent border-none h-15 w-auto"
-            onClick={() => handleClick("map")}
-          >
-            <div className="flex flex-row items-center gap-4 h-12 w-auto cursor-pointer">
-              <MapButton />
-              <text className="text-l font-medium text-gray-400">Mapa</text>
-            </div>
-          </button>
-          <button
-            type="button"
             className="bg-black border border-gray-800 rounded-full h-auto w-32"
             onClick={() => handleClick("theme")}
           >
             <div className="flex flex-row items-center gap-2 h-12 w-auto cursor-pointer">
-              <ThemeButton />
-              <text className="text-l font-medium text-gray-500">Nocturno</text>
+              <ThemeButton fill_col="#4e576a" />
+              <span className="text-l font-medium text-hover">Nocturno</span>
             </div>
           </button>
           <button
             type="button"
             className="bg-transparent border-none h-15 w-auto"
           >
-            <div className="flex flex-row items-center gap-4 h-12 w-auto cursor-pointer">
-              <ExitButton />
-              <text className="text-l font-medium text-gray-400">Salir</text>
+            <div className="flex flex-row items-center gap-4 h-16 w-auto cursor-pointer border-t border-gray-500">
+              <ExitButton fill_col="#4e576a" />
+              <span className="text-l font-medium text-hover">Salir</span>
             </div>
           </button>
         </div>

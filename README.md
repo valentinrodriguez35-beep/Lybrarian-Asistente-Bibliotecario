@@ -2,8 +2,6 @@
 
 #### Chatbot de asistencia para la consulta de disponibilidad física de material bibliográfico.
 
-#### Chatbot de asistencia para la consulta de disponibilidad física de material bibliográfico.
-
 <img width="992" height="426" alt="image" src="https://github.com/user-attachments/assets/80133528-1b8c-456f-aef8-9934e8e7b130" />
 
 ## Descripcion

@@ -4,7 +4,7 @@
 
 <img width="992" height="426" alt="image" src="https://github.com/user-attachments/assets/80133528-1b8c-456f-aef8-9934e8e7b130" />
 
-## Descripcion
+*[ScreenShot] de fragmento perteneciente a la **pantalla principal** (**Inicio / Home**) para realizar una consulta.*
 
 ## Tecnologías Implementadas
 
@@ -24,3 +24,12 @@
 
 ![Static Badge](https://img.shields.io/badge/Server-%235FA04E?style=for-the-badge&logo=nodedotjs&logoColor=%235FA04E&label=Node%20JS&labelColor=grey)
 ![Static Badge](https://img.shields.io/badge/Framework-%23000000?style=for-the-badge&logo=express&logoColor=%23000000&label=Express&labelColor=grey)
+
+## ¿Qué es Lybrarian?
+Proyecto que implementa tanto inteligencia artificial como mapa interactivo. Cuya finalidad es servir como un buscador de **Material Bibliografico** en lenguaje natural, permitiendo un modo de consulta mucho más permisivo con el usuario.
+
+### Inteligencia Artificial
+Implementando ![Static Badge](https://img.shields.io/badge/API-orange?style=for-the-badge&logo=googlegemini&logoColor=white&label=Google%20Gemini&labelColor=grey) como ***API*** su principal objetivo es ser el mediador entre el usuario y la biblioteca de la **Universidad Autonoma de Baja California (UABC)**, obteniendo elementos clave dentro de la consulta del usuario y transfiriendolos al sistema principal de la propia biblioteca.
+
+### Mapa Interactivo
+Haciendo uso de ![Static Badge](https://img.shields.io/badge/Library-%23199900?style=for-the-badge&logo=leaflet&logoColor=%23199900&label=Leaflet&labelColor=grey) y ![Static Badge](https://img.shields.io/badge/API-green?style=for-the-badge&logo=openstreetmap&logoColor=%237EBC6F&label=Open%20Street%20Map&labelColor=grey) como mapa principal. Su funcionalidad es brindar mayor informacion de las ubicaciones de las distintas sedes presenciales de las bibliotecas pertenecientes a la **Universidad Autonoma de Baja California (UABC)**, indiferente del campus.

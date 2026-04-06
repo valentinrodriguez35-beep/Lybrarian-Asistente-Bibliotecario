@@ -13,14 +13,32 @@ app.post("/chat", async (req, res) => {
   let message_body = req.body.message;
   console.log("Mensaje ha llegado al back-end: " + message_body);
   //send message to AI
-  let ai_result = await assistantRequest(message_body);
-  if (!ai_result) {
+  const ai_result = await assistantRequest(message_body);
+  if (!ai_result.success) {
     console.log(
       "IA no ha respondido correctamente | resultado vacio o indefinido.",
     );
     return res
       .status(500)
       .json({ error: "IA no ha respondido correctamente." });
+  }
+
+  //Get data from AI response
+  const messageData = ai_result.data;
+  if (messageData.is_ambiguous) {
+    return res.json({
+      response:
+        "La consulta que haz realizado es muy ambigua para poder ser respondida de forma esclarecedora, ¿Podrías proporcionamre más información del material que buscas?",
+      metadata: messageData,
+    });
+  }
+
+  if (messageData.intent === "unsupported_request") {
+    return res.json({
+      response:
+        "Lo siento. La consulta o respuesta que haz enviado se encuentra fuera del contexto de la aplicación.",
+      metadata: messageData,
+    });
   }
   //send AI Json to Koha's API to find coincidences
   try {

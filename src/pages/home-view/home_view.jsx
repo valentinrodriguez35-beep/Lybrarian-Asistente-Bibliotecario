@@ -6,12 +6,6 @@ import { supabase } from "../../services/server/database/supabase";
 import { useNavigate } from "react-router";
 
 export default function HomeView({ onSend }) {
-  const navigate = useNavigate();
-  useEffect(() => {
-    //No hay usuario previamente registrado
-    if (!supabase.auth.getUser()) navigate("/login");
-  }, [navigate]);
-
   return (
     <section
       id="home-view"

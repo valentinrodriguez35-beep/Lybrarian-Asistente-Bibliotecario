@@ -13,16 +13,14 @@ import AuthView from "./pages/auth-view/auth_view";
 export default function App() {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
-
+  const session = supabase.auth.getSession();
   useEffect(() => {
-    supabase.auth.onAuthStateChange((event, session) => {
+    supabase.auth.onAuthStateChange(() => {
       if (!session) {
         navigate("/login");
-      } else {
-        navigate("/");
       }
     });
-  }, []);
+  }, [session, navigate]);
 
   const handleSendMessage = (text) => {
     const newMessage = { text, type: "USER" };

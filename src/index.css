@@ -9,21 +9,32 @@
   }
 }
 
-@layer textHover {
+@layer components {
   .text-hover {
     @apply text-[#899db8] transition-colors duration-300 ease-in hover:text-gray-100;
   }
-}
 
-@layer inputFocus {
   .input-focus {
     @apply border-[#272a2e] transition-colors duration-300 ease-in focus:border-[#637aaa] focus:outline-none;
   }
-}
-
-@layer components {
   .google-focus {
     @apply border border-zinc-900;
+  }
+
+  .abierto_text {
+    @apply text-shadow-emerald-500 shadow-2xs;
+  }
+
+  .cerrado_text {
+    @apply text-shadow-red-500 shadow-2xs;
+  }
+
+  .abierto_marker {
+    @apply bg-emerald-500;
+  }
+
+  .cerrado_marker {
+    @apply bg-red-500;
   }
 }
 
@@ -46,8 +57,8 @@
   --boton-bg-pressed: #637aaa;
   --boton-bg-pressed_innershadow: #393d41;
   --info-tarjeta-color: #1c1c24;
-  --info-tarjeta-hover: #26262f;
   --info-tarjeta-pressed: #3a3a4a;
+  --info-tarjeta-hover: #26262f;
   --mapa-sidebar-color: #0b0c0c;
   --mapa-boton-disponible: #86ff7b;
   --mapa-boton-noDisponible: #ff7b7b;

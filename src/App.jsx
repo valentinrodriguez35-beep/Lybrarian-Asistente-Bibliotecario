@@ -1,10 +1,12 @@
+import SystemLayout from "./layouts/SystemLayout";
 import HomeView from "./pages/home-view/home_view";
 import ChatView from "./pages/chat-view/chat_view";
 import MapView from "./pages/map-view/map_view";
-import SideBar from "./components/sidebar/sideBar";
+import SignIn from "./pages/auth-view/Sign_In/sign_in";
 import "./App.css";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, BrowserRouter } from "react-router-dom";
 import { useState } from "react";
+import NotFound from "./pages/pageNotFound-view/NotFound";
 
 export default function App() {
   const navigate = useNavigate();
@@ -16,21 +18,23 @@ export default function App() {
     console.log("Mensaje cargado" + text);
     navigate("/chat");
   };
+  var aux = false;
+
+  if (aux) return <SignIn />;
+
   return (
-    <div className="flex flex-row h-dvh w-dvw">
-      <SideBar />
-      <main className="flex flex-col justify-center items-center flex-1 relative">
-        <Routes>
-          <Route path="/" element={<HomeView onSend={handleSendMessage} />} />
-          <Route
-            path="/chat"
-            element={
-              <ChatView messages={messages} onSend={handleSendMessage} />
-            }
-          />
-          <Route path="/map" element={<MapView />} />
-        </Routes>
-      </main>
-    </div>
+    <Routes>
+      <Route path="/login" element={<SignIn />} />
+      <Route element={<SystemLayout />}>
+        <Route path="/" element={<HomeView onSend={handleSendMessage} />} />
+        <Route
+          path="/chat"
+          element={<ChatView messages={messages} onSend={handleSendMessage} />}
+        />
+        <Route path="/map" element={<MapView />} />
+      </Route>
+
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }

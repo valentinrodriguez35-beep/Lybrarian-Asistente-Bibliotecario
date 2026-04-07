@@ -9,7 +9,7 @@ export default function HomeView({ onSend }) {
       id="home-view"
       className="flex flex-col justify-center 
       items-center h-screen w-full my-0 mx-auto 
-      animate-fade-in animate-duration-200"
+      animate-fade-in animate-duration-200 bg-[#0a0a0a]"
     >
       <div className={styles.header}>
         <div className={styles.header_logo}>

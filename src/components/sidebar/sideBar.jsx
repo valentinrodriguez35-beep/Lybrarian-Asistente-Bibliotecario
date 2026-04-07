@@ -5,16 +5,18 @@ import ExitButton from "../../assets/ExitButton";
 import HomeButton from "../../assets/HomeButton";
 import ThemeButton from "../../assets/ThemeButton";
 import { useNavigate } from "react-router";
+import { supabase } from "../../services/server/database/supabase";
 
-export default function sideBar() {
+export default function SideBar() {
   const navigate = useNavigate();
   const handleClick = (toGo) => {
     if (toGo === "map") navigate("/map");
     if (toGo === "home") navigate("/");
+    if (toGo === "exit") supabase.auth.signOut();
   };
 
   return (
-    <aside className="flex flex-col items-center w-35 h-dvh bg-(--sidebar-color) border-r border-r-gray-800">
+    <aside className="flex flex-col items-center w-45 h-dvh bg-(--sidebar-color) border-r border-r-gray-800">
       <nav className="flex flex-col justify-between h-full">
         <div className="flex flex-col pl-12 h-auto">
           <button
@@ -52,6 +54,7 @@ export default function sideBar() {
           <button
             type="button"
             className="bg-transparent border-none h-15 w-auto"
+            onClick={() => handleClick("exit")}
           >
             <div className="flex flex-row items-center gap-4 h-16 w-auto cursor-pointer border-t border-gray-500">
               <ExitButton fill_col="#4e576a" />

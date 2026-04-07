@@ -9,10 +9,13 @@ import { supabase } from "../../services/server/database/supabase";
 
 export default function SideBar() {
   const navigate = useNavigate();
-  const handleClick = (toGo) => {
+  const handleClick = async (toGo) => {
     if (toGo === "map") navigate("/map");
     if (toGo === "home") navigate("/");
-    if (toGo === "exit") supabase.auth.signOut();
+    if (toGo === "exit") {
+      await supabase.auth.signOut();
+      navigate("/login");
+    }
   };
 
   return (

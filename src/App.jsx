@@ -2,15 +2,28 @@ import SystemLayout from "./layouts/SystemLayout";
 import HomeView from "./pages/home-view/home_view";
 import ChatView from "./pages/chat-view/chat_view";
 import MapView from "./pages/map-view/map_view";
-import SignIn from "./pages/auth-view/Sign_In/sign_in";
+import SignIn from "./pages/auth-view/log-in/log_in";
 import "./App.css";
 import { Routes, Route, useNavigate, BrowserRouter } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NotFound from "./pages/pageNotFound-view/NotFound";
+import { supabase } from "./services/server/database/supabase";
+import AuthView from "./pages/auth-view/auth_view";
 
 export default function App() {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (!session) {
+        navigate("/login");
+      } else {
+        navigate("/");
+      }
+    });
+  }, []);
+
   const handleSendMessage = (text) => {
     const newMessage = { text, type: "USER" };
     setMessages((prev) => [...prev, newMessage]);
@@ -18,13 +31,10 @@ export default function App() {
     console.log("Mensaje cargado" + text);
     navigate("/chat");
   };
-  var aux = false;
-
-  if (aux) return <SignIn />;
 
   return (
     <Routes>
-      <Route path="/login" element={<SignIn />} />
+      <Route path="/login" element={<AuthView />} />
       <Route element={<SystemLayout />}>
         <Route path="/" element={<HomeView onSend={handleSendMessage} />} />
         <Route

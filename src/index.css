@@ -15,6 +15,26 @@
   }
 }
 
+@layer inputFocus {
+  .input-focus {
+    @apply border-[#272a2e] transition-colors duration-300 ease-in focus:border-[#637aaa] focus:outline-none;
+  }
+}
+
+@layer components {
+  .google-focus {
+    @apply border border-zinc-900;
+  }
+}
+
+@layer spacingInput {
+  .spacing {
+    padding: 0.625rem 1rem;
+    padding-right: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
 /*---> GLOBAL <---*/
 :root {
   --background-home: #0a0a0a;

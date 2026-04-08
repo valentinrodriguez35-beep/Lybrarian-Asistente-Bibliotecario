@@ -10,7 +10,7 @@ export default function ChatView({ messages, onSend }) {
           <MessageBubble text={msg.text} type={msg.type} key={index} />
         ))}
       </div>
-      <div className="w-full h-auto bg-transparent">
+      <div>
         <MessageInput onSend={onSend} />
       </div>
     </section>

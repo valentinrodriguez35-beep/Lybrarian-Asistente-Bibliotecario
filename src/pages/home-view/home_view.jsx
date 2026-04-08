@@ -13,7 +13,7 @@ export default function HomeView({ onSend }) {
       className="flex flex-1 flex-col w-full justify-center 
       items-center animate-fade-in animate-duration-500"
     >
-      <div className="w-full max-w-3xl px-12!">
+      <div className="w-full max-w-3xl px-12">
         <HomeLogo />
         <MessageInput onSend={onSend} />
       </div>

@@ -72,12 +72,6 @@
   --ai-mensaje: #272b30;
   --caja-mensaje: #141517;
   --caja-mensaje-borderHover: var(--boton-bg-pressed);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
   font-family: "Google Sans", sans-serif;
 }
 

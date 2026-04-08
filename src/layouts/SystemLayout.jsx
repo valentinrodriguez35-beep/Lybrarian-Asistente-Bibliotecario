@@ -1,8 +1,5 @@
 import React from "react";
 import SideBar from "../components/sidebar/sideBar";
-import MapView from "../pages/map-view/map_view";
-import HomeView from "../pages/map-view/map_view";
-import ChatView from "../pages/chat-view/chat_view";
 import { Outlet } from "react-router-dom";
 
 const SystemLayout = () => {

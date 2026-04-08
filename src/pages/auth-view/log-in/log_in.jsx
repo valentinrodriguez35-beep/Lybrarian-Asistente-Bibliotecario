@@ -75,7 +75,7 @@ export default function LogIn() {
               className="flex-1 bg-(--caja-mensaje) h-16 rounded-l-2xl border border-transparent whitespace-nowrap px-4!
                text-white font-normal text-[1rem] tracking-[1px] focus: ease-in-out duration-300 transition-colors"
             />
-            <div className="flex flex-col justify-center-safe h-16 rounded-r-2xl tracking-[1px] px-4! whitespace-nowrap bg-blue-900">
+            <div className="flex flex-col justify-center-safe h-16 rounded-r-2xl tracking-[1px] px-4 whitespace-nowrap bg-blue-900">
               <span className="text-white font-normal text-[1rem] ">
                 @uabc.edu.mx
               </span>
@@ -85,13 +85,13 @@ export default function LogIn() {
             Iniciar Sesión
           </button>
         </div>
-        <div className="flex flex-col w-full gap-6 pt-12!">
+        <div className="flex flex-col w-full gap-6 pt-12">
           <div>
             <div className="h-px bg-gray-700/50 border-0" />
           </div>
           <div>
             <button
-              className="p-4! flex flex-row items-center justify-center rounded-2xl gap-6 h-16 w-full
+              className="p-4 flex flex-row items-center justify-center rounded-2xl gap-6 h-16 w-full
              bg-[#0e1014] google-focus
              cursor-pointer"
               type="button"

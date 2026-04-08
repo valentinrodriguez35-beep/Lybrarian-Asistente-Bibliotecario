@@ -19,7 +19,7 @@ export default function SideBar() {
   };
 
   return (
-    <aside className="flex flex-col items-center w-45 h-dvh bg-(--sidebar-color) border-r border-r-gray-800 hover:drop-shadow-[0_0_2px_#60A5FA] ease-in-out duration-700">
+    <aside className="flex flex-col items-center min-w-fit p-6 h-dvh bg-(--sidebar-color) border-r border-r-gray-800 hover:drop-shadow-[0_0_2px_#60A5FA] ease-in-out duration-700">
       <nav className="flex flex-col justify-between h-full">
         <div className="flex flex-col h-auto">
           <button
@@ -27,7 +27,7 @@ export default function SideBar() {
             className="bg-transparent border-none h-15 w-auto"
             onClick={() => handleClick("home")}
           >
-            <div className="flex flex-row items-end gap-3 h-12 w-auto cursor-pointer">
+            <div className="flex flex-row items-center gap-3 h-12 w-auto cursor-pointer py-2">
               <HomeButton fill_col="#66718a" />
               <span className="text-l font-medium text-hover">Inicio</span>
             </div>
@@ -37,21 +37,25 @@ export default function SideBar() {
             className="bg-transparent border-none h-15 w-auto"
             onClick={() => handleClick("map")}
           >
-            <div className="flex flex-row items-end gap-3 h-12 w-auto cursor-pointer">
+            <div className="flex flex-row items-center gap-3 h-12 w-auto cursor-pointer py-2">
               <MapButton fill_col="#66718a" />
-              <span className="text-l font-medium text-hover">Mapa</span>
+              <span className="text-l font-medium text-hover">
+                Mapa Interactivo
+              </span>
             </div>
           </button>
         </div>
-        <div className="flex flex-col justify-between w-full h-auto pb-2! gap-3">
+        <div className="flex flex-col justify-between w-full h-auto pb-2 gap-3">
           <button
             type="button"
-            className="bg-black border border-gray-800 rounded-full h-auto w-32"
+            className="bg-transparent border-none h-15 w-auto"
             onClick={() => handleClick("theme")}
           >
-            <div className="flex flex-row items-center gap-2 h-12 w-auto cursor-pointer">
+            <div className="flex flex-row items-center gap-3 h-12 w-auto cursor-pointer py-2">
               <ThemeButton fill_col="#4e576a" />
-              <span className="text-l font-medium text-hover">Nocturno</span>
+              <span className="text-l font-medium text-hover whitespace-nowrap">
+                Modo Oscuro
+              </span>
             </div>
           </button>
           <button
@@ -59,9 +63,11 @@ export default function SideBar() {
             className="bg-transparent border-none h-15 w-auto"
             onClick={() => handleClick("exit")}
           >
-            <div className="flex flex-row items-center gap-4 h-16 w-auto cursor-pointer border-t border-gray-500">
+            <div className="flex flex-row items-center gap-3 h-12 w-auto cursor-pointer py-2">
               <ExitButton fill_col="#4e576a" />
-              <span className="text-l font-medium text-hover">Salir</span>
+              <span className="text-l font-medium text-hover">
+                Cerrar Sesion
+              </span>
             </div>
           </button>
         </div>

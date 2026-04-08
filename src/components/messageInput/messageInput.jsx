@@ -17,7 +17,7 @@ export default function messageInput({ onSend }) {
   };
 
   return (
-    <div className="w-full max-w-2xl my-0 mx-auto h-35">
+    <div className="w-full max-w-2xl my-0 mx-auto h-auto">
       <form onSubmit={handleSubmit} className="relative w-full">
         <textarea
           className={`${styles.txtField} focus:drop-shadow-[0_0_2px_#60A5FA]`}
@@ -37,7 +37,7 @@ export default function messageInput({ onSend }) {
           <SendIcon />
         </button>
       </form>
-      <p className="text-gray-500 flex-col text-center font-medium text-sm pb-4 pt-5">
+      <p className="text-gray-500 flex-col text-center font-medium text-sm pb-4">
         Lybrarian puede equivocarse. Visita{" "}
         <a href="https://catalogocimarron.uabc.mx" className="text-blue-400">
           Catalogo Cimarrón

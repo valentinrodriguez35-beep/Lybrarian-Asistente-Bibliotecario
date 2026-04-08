@@ -10,11 +10,13 @@ export default function HomeView({ onSend }) {
   return (
     <section
       id="home-view"
-      className="flex flex-col justify-center-safe 
-      items-start h-dvh w-2xl animate-fade-in animate-duration-500"
+      className="flex flex-1 flex-col w-full justify-center 
+      items-center animate-fade-in animate-duration-500"
     >
-      <HomeLogo />
-      <MessageInput onSend={onSend} />
+      <div className="w-full max-w-3xl px-12!">
+        <HomeLogo />
+        <MessageInput onSend={onSend} />
+      </div>
     </section>
   );
 }

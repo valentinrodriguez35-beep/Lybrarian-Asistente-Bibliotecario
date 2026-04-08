@@ -4,12 +4,12 @@ import BrandGitHub from "../../assets/BrandGitHub";
 
 export default function AuthView() {
   return (
-    <section className="h-dvh w-dvw flex flex-col justify-center items-center">
-      <div className="flex flex-col h-full w-110">
+    <section className="flex flex-col min-h-screen w-full justify-center-safe items-center-safe">
+      <div className="flex flex-1 w-full justify-center-safe items-center-safe">
         <LogIn />
       </div>
-      <footer className="pb-4!">
-        <a className="flex flex-row gap-2 cursor-pointer">
+      <footer className="py-4! md:py-6!">
+        <a className="flex flex-row gap-2 cursor-pointer text-center">
           <BrandGitHub />
           <span className="text-gray-100 font-semibold">GitHub</span>
           <span className="text-gray-100 font-semibold">|</span>

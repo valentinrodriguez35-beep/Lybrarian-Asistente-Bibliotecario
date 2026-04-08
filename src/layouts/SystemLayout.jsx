@@ -7,9 +7,9 @@ import { Outlet } from "react-router-dom";
 
 const SystemLayout = () => {
   return (
-    <div className="flex flex-row h-dvh w-dvw ">
+    <div className="flex flex-row min-h-dvh min-full ">
       <SideBar />
-      <main className="flex flex-col justify-center items-center flex-1 relative">
+      <main className="flex flex-col flex-1 relative">
         <Outlet />
       </main>
     </div>

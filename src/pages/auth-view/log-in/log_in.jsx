@@ -49,7 +49,7 @@ export default function LogIn() {
 
   return (
     <section className="h-dvh w-full flex flex-col justify-center-safe items-center-safe gap-12 animate-fade-in animate-duration-500">
-      <div className="h-auto w-auto flex flex-col justify-center-safe items-center-safe ">
+      <div className="h-dvh w-auto flex flex-col justify-center-safe items-center-safe ">
         <ProyectLogo h="100" w="100" effect="logo-effect" />
       </div>
       <div className="flex flex-col w-auto h-auto gap-4 justify-center-safe items-center-safe pb-4!">

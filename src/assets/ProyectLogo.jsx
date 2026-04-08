@@ -1,11 +1,12 @@
 import React from "react";
 
-export default function ProyectLogo() {
+export default function ProyectLogo({ h, w, effect }) {
   return (
     <svg
-      width="50"
-      height="50"
-      viewBox="0 0 50 50"
+      className={`${effect} animate-slide-rotate-in animate-duration-700`}
+      height={`${h}`}
+      width={`${w}`}
+      viewBox={`0 0 50 50`}
       fill="url(#paint0_linear_174_48)"
       xmlns="http://www.w3.org/2000/svg"
     >

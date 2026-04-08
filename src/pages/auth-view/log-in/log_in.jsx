@@ -3,6 +3,7 @@ import styles from "../log-in/log_in.module.css";
 import { supabase } from "../../../services/server/database/supabase";
 import { useNavigate } from "react-router";
 import Icon8Google from "../../../assets/icon8Google";
+import ProyectLogo from "../../../assets/ProyectLogo";
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
@@ -47,14 +48,23 @@ export default function LogIn() {
   };
 
   return (
-    <div className="h-full w-full flex flex-col justify-center-safe items-center-safe gap-12">
-      <div className="flex flex-col w-auto h-auto gap-4">
-        <h1 className="text-white font-bold text-5xl text-center">Lybrarian</h1>
-        <h2 className="text-gray-200 font-normal text-2xl text-center font-stretch-50%">
-          Bienvenido. Por favor, identificate.
+    <section className="h-full w-full flex flex-col justify-center-safe items-center-safe gap-12 animate-fade-in animate-duration-500">
+      <div className="h-auto w-auto flex flex-col justify-center-safe items-center-safe ">
+        <ProyectLogo h="100" w="100" effect="logo-effect" />
+      </div>
+      <div className="flex flex-col w-auto h-auto gap-4 justify-center-safe items-center-safe pb-4!">
+        <h1>
+          <span className="text-[#93C5FD] font-medium text-5xl text-center animate-fade-in-up animate-duration-1000 animate-delay-150">
+            Lybrarian
+          </span>
+        </h1>
+        <h2>
+          <span className="text-gray-200 font-normal text-2xl text-center animate-fade-in-up animate-duration-1000 animate-delay-250">
+            Bibliotecario Universitario
+          </span>
         </h2>
       </div>
-      <form className="w-full h- flex flex-col gap-12" onSubmit={handleSubmit}>
+      <form className="w-full h- flex flex-col gap-20" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full gap-10">
           <div className="flex flex-row w-full h-auto">
             <input
@@ -71,26 +81,30 @@ export default function LogIn() {
               @uabc.edu.mx
             </div>
           </div>
-          <button className="bg-red-50 h-16 border rounded-2xl text-zinc-950 text-xl font-semibold text-center">
+          <button className="bg-(--boton-bg-pressed) h-16 border rounded-2xl border-none text-zinc-50 text-xl font-semibold text-center cursor-pointer">
             Iniciar Sesión
           </button>
         </div>
-        <div>
-          <div className="h-px bg-gray-700/50 border-0" />
-        </div>
-        <div>
-          <button
-            className="p-4! flex flex-row items-center justify-center gap-6 h-16 w-full
-             bg-[#0e1014] text-white rounded-2xl font-semibold text-xl text-center google-focus
+        <div className="flex flex-col gap-8 pt-12!">
+          <div>
+            <div className="h-px bg-gray-700/50 border-0" />
+          </div>
+          <div>
+            <button
+              className="p-4! flex flex-row items-center justify-center rounded-2xl gap-6 h-16 w-full
+             bg-[#0e1014] google-focus
              cursor-pointer"
-            type="button"
-            onClick={handleProviderSubmit}
-          >
-            <Icon8Google />
-            Iniciar Sesión con Google
-          </button>
+              type="button"
+              onClick={handleProviderSubmit}
+            >
+              <Icon8Google />
+              <span className="text-white font-semibold text-xl text-center">
+                Iniciar Sesión con Google
+              </span>
+            </button>
+          </div>
         </div>
       </form>
-    </div>
+    </section>
   );
 }

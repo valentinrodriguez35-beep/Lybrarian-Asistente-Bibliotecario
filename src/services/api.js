@@ -10,7 +10,7 @@ export async function send_request(message) {
       },
     });
 
-    if (response.ok)
+    if (!response.ok)
       throw new error(
         "ERROR! No se ha podido establecer comunicación con el servidor.",
       );
@@ -18,7 +18,10 @@ export async function send_request(message) {
     const data = await response.json();
     // Aquí es donde recibes lo que enviamos desde el backend
     console.log("Respuesta de la IA recibida: ", data);
-    return data;
+    return {
+      rol: "AI",
+      body: JSON.stringify(data),
+    };
   } catch (error) {
     console.error("Error al recibir mensaje del servidor");
     return {

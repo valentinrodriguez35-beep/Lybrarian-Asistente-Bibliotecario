@@ -10,10 +10,16 @@
 }
 
 @layer components {
+  .gradient-container {
+    @apply mask-b-from-95% mask-b-to-100% mask-t-from-95% mask-t-to-100%;
+  }
   .text-hover {
-    @apply text-[#899db8] transition-colors duration-300 ease-in hover:text-gray-100;
+    @apply text-[#899db8] transition-colors duration-300 ease-in hover:text-gray-100 focus:text-gray-100;
   }
 
+  .logo-effect {
+    @apply drop-shadow-[0_0_5px_#60A5FA] hover:drop-shadow-[0_0_20px_#60A5FA] ease-in-out duration-1000;
+  }
   .input-focus {
     @apply border-[#272a2e] transition-colors duration-300 ease-in focus:border-[#637aaa] focus:outline-none;
   }

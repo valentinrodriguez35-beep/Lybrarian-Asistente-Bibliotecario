@@ -19,9 +19,9 @@ export default function SideBar() {
   };
 
   return (
-    <aside className="flex flex-col items-center w-45 h-dvh bg-(--sidebar-color) border-r border-r-gray-800">
+    <aside className="flex flex-col items-center w-45 h-dvh bg-(--sidebar-color) border-r border-r-gray-800 hover:drop-shadow-[0_0_2px_#60A5FA] ease-in-out duration-700">
       <nav className="flex flex-col justify-between h-full">
-        <div className="flex flex-col pl-12 h-auto">
+        <div className="flex flex-col h-auto">
           <button
             type="button"
             className="bg-transparent border-none h-15 w-auto"
@@ -43,7 +43,7 @@ export default function SideBar() {
             </div>
           </button>
         </div>
-        <div className="flex flex-col justify-between gap-2 w-full h-auto p-10">
+        <div className="flex flex-col justify-between w-full h-auto pb-2! gap-3">
           <button
             type="button"
             className="bg-black border border-gray-800 rounded-full h-auto w-32"

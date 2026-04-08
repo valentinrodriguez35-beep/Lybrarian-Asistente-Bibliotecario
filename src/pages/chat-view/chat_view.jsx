@@ -8,24 +8,26 @@ export default function ChatView({ messages, onSend }) {
     <section
       className="flex flex-col justify-center
     items-end h-dvh w-2xl
-    z-0 mx-auto pt-4 overflow-hidden 
+    z-0 mx-auto pt-2! overflow-hidden 
     animate-fade-in animate-duration-250"
     >
       <div
         className="flex flex-col justify-start items-center
       h-200 w-full
-      gap-5
-      pt-16
+      gap-6
+      pb-12!
+      pt-12!
       overflow-y-auto
-      no-scrollbar"
+      no-scrollbar gradient-container"
       >
         {messages.map((msg, index) => (
           <MessageBubble text={msg.text} type={msg.type} key={index} />
         ))}
       </div>
-      <footer className="w-full p-4 bg-transparent">
+
+      <div className="sticky w-full h-auto pt-2! bg-transparent">
         <MessageInput onSend={onSend} />
-      </footer>
+      </div>
     </section>
   );
 }

@@ -6,6 +6,7 @@ import HomeButton from "../../assets/HomeButton";
 import ThemeButton from "../../assets/ThemeButton";
 import { useNavigate } from "react-router";
 import { supabase } from "../../services/server/database/supabase";
+import ButtonLayout from "./ButtonLayout/ButtonLayout";
 
 export default function SideBar() {
   const navigate = useNavigate();
@@ -19,31 +20,20 @@ export default function SideBar() {
   };
 
   return (
-    <aside className="flex flex-col items-center min-w-fit p-6 h-dvh bg-(--sidebar-color) border-r border-r-gray-800 hover:drop-shadow-[0_0_2px_#60A5FA] ease-in-out duration-700">
-      <nav className="flex flex-col justify-between h-full">
+    <aside className="flex flex-col items-start min-w-fit p-6 h-screen bg-(--sidebar-color) border-r border-r-gray-800">
+      <nav className="flex flex-col flex-1 items-start justify-between">
         <div className="flex flex-col h-auto">
-          <button
-            type="button"
-            className="bg-transparent border-none h-15 w-auto"
-            onClick={() => handleClick("home")}
-          >
+          <ButtonLayout onClick={() => handleClick("home")} label={"Inicio"}>
             <div className="flex flex-row items-center gap-3 h-12 w-auto cursor-pointer py-2">
               <HomeButton fill_col="#66718a" />
-              <span className="text-l font-medium text-hover">Inicio</span>
             </div>
-          </button>
-          <button
-            type="button"
-            className="bg-transparent border-none h-15 w-auto"
-            onClick={() => handleClick("map")}
-          >
+          </ButtonLayout>
+          
+          <ButtonLayout onClick={() => handleClick("map")} label={"Mapa Interactivo"}>
             <div className="flex flex-row items-center gap-3 h-12 w-auto cursor-pointer py-2">
               <MapButton fill_col="#66718a" />
-              <span className="text-l font-medium text-hover">
-                Mapa Interactivo
-              </span>
             </div>
-          </button>
+          </ButtonLayout>
         </div>
         <div className="flex flex-col justify-between w-full h-auto pb-2 gap-3">
           <button

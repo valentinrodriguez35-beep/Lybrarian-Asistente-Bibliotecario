@@ -4,13 +4,13 @@ import MessageBubble from "../../components/messageBubble/messageBubble";
 
 export default function ChatView({ messages, onSend }) {
   return (
-    <section className="flex min-h-screen flex-col w-full pt-4 animate-fade-in animate-duration-250">
-      <div className="flex flex-col flex-1 w-full gap-6 overflow-y-auto no-scrollbar gradient-container">
+    <section className="flex flex-col h-full w-full">
+      <div className="flex flex-col flex-1 gap-6 py-4 justify-start items-start overflow-y-auto no-scrollbar">
         {messages.map((msg, index) => (
           <MessageBubble text={msg.text} type={msg.type} key={index} />
         ))}
       </div>
-      <div>
+      <div className="w-full">
         <MessageInput onSend={onSend} />
       </div>
     </section>

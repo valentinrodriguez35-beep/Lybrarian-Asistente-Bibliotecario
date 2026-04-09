@@ -4,7 +4,7 @@ import ArticleLayout from "./articleLayout/ArticleLayout";
 
 export default function MapArticles() {
   return (
-    <nav className="flex flex-col flex-1 py-12 gap-6 margin-1 items-center bg-[#0B0C0C] h-screen w-full 
+    <nav className="flex flex-col py-6 gap-6 items-center bg-[#0B0C0C] h-screen w-full 
     border-r border-gray-600/50 overflow-y-auto no-scrollbar gradient-container">
         <ArticleLayout
           name="Biblioteca Central Tijuana"

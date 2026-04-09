@@ -17,7 +17,7 @@ export default function messageInput({ onSend }) {
   };
 
   return (
-    <div className="w-full max-w-2xl my-0 mx-auto h-auto">
+    <div className="w-full max-w-4xl h-24">
       <form onSubmit={handleSubmit} className="relative w-full">
         <textarea
           className={`${styles.txtField} focus:drop-shadow-[0_0_2px_#60A5FA]`}

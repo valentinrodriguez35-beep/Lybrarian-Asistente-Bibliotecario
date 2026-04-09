@@ -1,5 +1,5 @@
 .chat_input_area {
-  height: auto;
+  height: 100%;
   width: 100%;
   max-width: 40.625rem;
 }
@@ -23,7 +23,7 @@
   color: white;
   border-radius: 1.5rem;
   border-width: 1px;
-  min-height: 6rem;
+  height: 100%;
   width: 100%;
   max-height: 12.5rem;
   max-width: 100%;

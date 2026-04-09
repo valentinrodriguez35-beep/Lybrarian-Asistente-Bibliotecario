@@ -4,9 +4,9 @@ import { Outlet } from "react-router-dom";
 
 const SystemLayout = () => {
   return (
-    <div className="flex flex-row min-h-dvh min-full ">
+    <div className="flex flex-row h-screen overflow-hidden">
       <SideBar />
-      <main className="flex flex-col flex-1 relative">
+      <main className="flex flex-col flex-1 min-h-0 relative">
         <Outlet />
       </main>
     </div>

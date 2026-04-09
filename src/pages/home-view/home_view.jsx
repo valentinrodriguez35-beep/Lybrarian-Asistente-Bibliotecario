@@ -8,12 +8,8 @@ import HomeLogo from "../../assets/HomeLogo";
 
 export default function HomeView({ onSend }) {
   return (
-    <section
-      id="home-view"
-      className="flex flex-1 flex-col w-full justify-center 
-      items-center animate-fade-in animate-duration-500"
-    >
-      <div className="w-full max-w-3xl px-12">
+    <section className="flex flex-col p-8 h-full w-full">
+      <div className="flex flex-col justify-center items-center h-full w-full">
         <HomeLogo />
         <MessageInput onSend={onSend} />
       </div>

@@ -19,7 +19,7 @@ export default function SideBar() {
   };
 
   return (
-    <aside className="flex flex-col items-center min-w-fit p-6 h-dvh bg-(--sidebar-color) border-r border-r-gray-800 hover:drop-shadow-[0_0_2px_#60A5FA] ease-in-out duration-700">
+    <aside className="flex flex-col items-center min-w-fit p-6 h-dvh bg-(--sidebar-color) border-r border-r-gray-800">
       <nav className="flex flex-col justify-between h-full">
         <div className="flex flex-col h-auto">
           <button

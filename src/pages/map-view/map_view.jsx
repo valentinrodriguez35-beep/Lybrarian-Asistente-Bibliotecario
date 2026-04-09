@@ -6,8 +6,8 @@ import MapArticles from "../../components/mapArticles/MapArticles";
 export default function MapView() {
   //Manejar la logica de mapas
   return (
-    <section className="bg-[#0B0C0C] flex flex-row h-full w-full animate-fade-in">
-      <div className="h-full w-auto">
+    <section className="bg-[#0B0C0C] flex flex-1 min-h-screen flex-row w-full animate-fade-in">
+      <div className="w-full max-w-xs">
         <MapArticles />
       </div>
       <div className=" bg-black h-full w-full flex text-white">

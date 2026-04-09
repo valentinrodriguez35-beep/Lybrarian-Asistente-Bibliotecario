@@ -4,8 +4,8 @@ import ArticleLayout from "./articleLayout/ArticleLayout";
 
 export default function MapArticles() {
   return (
-    <nav className="gap-6 py-12 bg-[#0B0C0C] h-full w-81.25 border-r border-gray-600/50 overflow-y-auto overflow-hidden no-scrollbar gradient-container">
-      <div className="flex flex-col items-center-safe gap-6">
+    <nav className="flex flex-col flex-1 py-12 gap-6 margin-1 items-center bg-[#0B0C0C] h-screen w-full 
+    border-r border-gray-600/50 overflow-y-auto no-scrollbar gradient-container">
         <ArticleLayout
           name="Biblioteca Central Tijuana"
           status="abierto_marker"
@@ -41,7 +41,6 @@ export default function MapArticles() {
           status="cerrado_marker"
           statusText="cerrado_text"
         />
-      </div>
     </nav>
   );
 }

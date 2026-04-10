@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styles from "./home_view.module.css";
-import MessageInput from "../../components/messageInput/MessageInput";
+import MessageInput from "../../components/MessageInput/MessageInput";
 
 import HomeLogo from "../../assets/HomeLogo";
 import ViewLayout from "../../layouts/ViewLayout";

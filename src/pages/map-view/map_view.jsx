@@ -7,13 +7,13 @@ import ViewLayout from "../../layouts/ViewLayout";
 export default function MapView() {
   //Manejar la logica de mapas
   return (
-    <ViewLayout>
-      <div  className="flex flex-col h-full w-xs overflow-y-auto">
+    <ViewLayout className="flex flex-row w-full">
+      <aside className="flex flex-col w-fit h-full">
         <MapArticles />
-      </div>
-      <div className=" bg-black h-full w-full flex text-white">
+      </aside>
+      <main className=" bg-black flex flex-1 text-white">
         <InteractiveMap />
-      </div>
+      </main>
     </ViewLayout>
   );
 }

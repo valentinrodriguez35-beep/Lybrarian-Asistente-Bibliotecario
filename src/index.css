@@ -54,6 +54,7 @@
 
 /*---> GLOBAL <---*/
 @theme {
+  --sb-button-iddle: #66718a;
   --background-home: #0a0a0a;
   --background-chat: #0a0a0a;
   --sidebar-color: #0e0e0e;

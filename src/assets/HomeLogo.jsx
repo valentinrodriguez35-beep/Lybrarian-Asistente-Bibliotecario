@@ -3,7 +3,7 @@ import ProyectLogo from "./ProyectLogo";
 
 export default function HomeLogo() {
   return (
-    <div className="flex flex-col justify-center items-center w-auto h-auto gap-2 pb-8">
+    <div className="flex flex-col justify-center items-start w-auto h-auto gap-2 pb-8">
       <div className="flex flex-row items-center justify-center gap-4 pb-4">
         <ProyectLogo h="55" w="55" effect="logo-effect" />
         <h1>

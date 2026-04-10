@@ -6,7 +6,7 @@ const SystemLayout = () => {
   return (
     <div className="flex flex-row h-screen overflow-hidden">
       <SideBar />
-      <main className="flex flex-col flex-1 min-h-0 relative">
+      <main className="flex flex-col flex-1 h-screen overflow-hidden relative">
         <Outlet />
       </main>
     </div>

@@ -7,9 +7,9 @@ import ViewLayout from "../../layouts/ViewLayout";
 
 export default function HomeView({ onSend }) {
   return (
-    <ViewLayout className="flex flex-1 flex-col justify-center items-center w-full">
-        <HomeLogo />
-        <MessageInput onSend={onSend} />
+    <ViewLayout className="flex flex-col justify-center items-center w-full">
+      <HomeLogo />
+      <MessageInput onSend={onSend} />
     </ViewLayout>
   );
 }

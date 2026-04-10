@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import styles from "./messageInput.module.css";
-import SendIcon from "../../assets/SendIcon.jsx";
+import SendIcon from "../../assets/SendIcon";
+import ButtonLayout from "../sidebar/ButtonLayout/ButtonLayout";
+import SideBar from "../sidebar/sideBar";
 
-export default function messageInput({ onSend }) {
+export default function MessageInput({ onSend }) {
   const [text, setText] = useState("");
-
-  const handleChange = (e) => {
-    setText(e.target.value);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,33 +14,28 @@ export default function messageInput({ onSend }) {
   };
 
   return (
-    <div className="sm:w-full max-w-175 h-auto">
-      <form onSubmit={handleSubmit} className="relative w-full">
-        <textarea
-          className={`${styles.txtField} focus:drop-shadow-[0_0_2px_#60A5FA]`}
-          name="txtField"
-          id="text-input"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Consulta por un libro, autor o tema..."
-        ></textarea>
-        <button
-          type="submit"
-          className="absolute right-3 bottom-5 w-7 h-7
-                    bg-transparent border-transparent 
-                    flex flex-col justify-center items-center
-                    rounded-full hover:cursor-pointer"
+    <form
+      onSubmit={handleSubmit}
+      className="w-full lg:w-175 min-h-fit max-h-40 rounded-3xl px-4 lg:px-2 pt-5 lg:pt-4 pb-3 bg-(--caja-mensaje) input-focus"
+    >
+      {/*Nueva version del message input*/}
+      <textarea
+        aria-label="Message Box"
+        placeholder="Consulta por libro, autor o tema..."
+        value={text}
+        className="flex flex-1 w-full px-2 pb-6 field-sizing-content max-h-40 no-scrollbar resize-none font-normal lg:text-[18px] outline-none text-gray-50"
+        onChange={(e) => setText(e.target.value)}
+      ></textarea>
+      <div className="flex flex-row flex-1 justify-end items-center">
+        <ButtonLayout
+          type={"submit"}
+          label={""}
+          label_style={"hidden"}
+          disabled={!text.trim()}
         >
-          <SendIcon />
-        </button>
-      </form>
-      <p className="text-gray-500 flex-col text-center font-medium text-sm">
-        Lybrarian puede equivocarse. Visita{" "}
-        <a href="https://catalogocimarron.uabc.mx" className="text-blue-400">
-          Catalogo Cimarrón
-        </a>{" "}
-        para información actualizada.
-      </p>
-    </div>
+          <SendIcon fill_col="button-behavior" />
+        </ButtonLayout>
+      </div>
+    </form>
   );
 }

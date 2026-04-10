@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import MessageInput from "../../components/messageInput/messageInput";
 import MessageBubble from "../../components/messageBubble/messageBubble";
 import ViewLayout from "../../layouts/ViewLayout";
 import MessagesContainer from "./Messages_Container/MessagesContainer";
+import MessageInput from "../../components/messageInput/MessageInput";
 
 export default function ChatView({ messages, onSend }) {
   return (
@@ -13,7 +13,7 @@ export default function ChatView({ messages, onSend }) {
         ))}
       </MessagesContainer>
       <footer className="flex flex-col items-center p-4 h-auto w-full">
-        <MessageInput onSend={onSend} />
+        <MessageInput />
       </footer>
     </ViewLayout>
   );

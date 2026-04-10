@@ -20,16 +20,23 @@ export default function SideBar() {
   };
 
   return (
-    <aside className="flex flex-col w-fit p-6 h-screen bg-(--sidebar-color) border-r border-r-gray-800">
+    <aside className="flex flex-col w-fit p-6 h-screen bg-(--sidebar-color) border-r border-r-gray-800 transition-transform duration-300 ease-in">
       <nav className="flex flex-col flex-1 w-full items-start justify-between">
         <div className="flex flex-col h-auto">
-          <ButtonLayout onClick={() => handleClick("home")} label={"Inicio"}>
+          <ButtonLayout
+            type={"button"}
+            onClick={() => handleClick("home")}
+            label={"Inicio"}
+            label_style={""}
+          >
             <HomeButton fill_col="fill-(--sb-button-iddle)" />
           </ButtonLayout>
 
           <ButtonLayout
+            type={"button"}
             onClick={() => handleClick("map")}
             label={"Mapa Interactivo"}
+            label_style={""}
           >
             <MapButton fill_col="fill-(--sb-button-iddle)" />
           </ButtonLayout>
@@ -37,14 +44,18 @@ export default function SideBar() {
 
         <div className="flex flex-col justify-between w-full h-auto pb-2 gap-3">
           <ButtonLayout
+            type={"button"}
             onClick={() => handleClick("theme")}
             label={"Modo Oscuro"}
+            label_style={""}
           >
             <ThemeButton fill_col="fill-(--sb-button-iddle)" />
           </ButtonLayout>
           <ButtonLayout
+            type={"button"}
             onClick={() => handleClick("exit")}
             label={"Cerrar Sesión"}
+            label_style={""}
           >
             <ExitButton fill_col="fill-(--sb-button-iddle)" />
           </ButtonLayout>

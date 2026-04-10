@@ -3,22 +3,25 @@ import { useNavigate } from "react-router";
 import { supabase } from "../../../services/server/database/supabase";
 
 export default function ButtonLayout({
+  type,
   children,
   label,
   onClick,
-  button_style,
+  label_style,
 }) {
   return (
     <button
-      type="button"
+      type={type}
       onClick={onClick}
-      className="flex bg-transparent border-none h-12 w-full cursor-pointer"
+      className="flex bg-transparent border-none h-fit w-fit items-center justify-center cursor-pointer"
       aria-label={label}
     >
-      {/*Renderizar los botones pertenecientes a la barra lateral*/}
+      {/*Renderizar boton*/}
       <div className="inline-flex flex-row items-center gap-3 h-full py-2">
         {children}
-        <span className={`text-[16px] font-medium text-hover ${button_style}`}>
+        <span
+          className={`text-[16px] font-medium text-hover sm:hidden lg:block ${label_style}`}
+        >
           {label}
         </span>
       </div>

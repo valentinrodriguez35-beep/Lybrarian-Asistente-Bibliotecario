@@ -6,7 +6,7 @@ export default function messageBubble({ text, type }) {
   return (
     /*User = .userMessage
     AI = .aiMessage*/
-    <div className={styles.userMessage}>
+    <div className={styles.aiMessage}>
       <div className={styles.bubble}>
         <div className={styles.msgText}>
           <ReactMarkdown>{text}</ReactMarkdown>

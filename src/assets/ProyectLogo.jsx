@@ -3,7 +3,7 @@ import React from "react";
 export default function ProyectLogo({ h, w, effect }) {
   return (
     <svg
-      className={`${effect} animate-slide-rotate-in animate-duration-700`}
+      className={`${effect} animate-rotate-in animate-duration-1000`}
       height={`${h}`}
       width={`${w}`}
       viewBox={`0 0 50 50`}

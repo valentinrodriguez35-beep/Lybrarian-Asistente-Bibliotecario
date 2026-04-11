@@ -20,7 +20,7 @@ export default function SideBar() {
   };
 
   return (
-    <aside className="flex flex-col w-fit p-6 h-screen bg-(--sidebar-color) border-r border-r-gray-800 transition-transform duration-300 ease-in">
+    <aside className="hidden sm:flex flex-col w-fit p-6 h-screen bg-(--sidebar-color) border-r border-r-gray-800 transition-transform duration-300 ease-in">
       <nav className="flex flex-col flex-1 w-full items-start justify-between">
         <div className="flex flex-col h-auto">
           <ButtonLayout

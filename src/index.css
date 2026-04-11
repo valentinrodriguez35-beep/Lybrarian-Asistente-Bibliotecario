@@ -19,7 +19,9 @@
   .text-hover {
     @apply text-[#899db8] transition-colors duration-300 ease-in hover:text-gray-100 focus:text-gray-100;
   }
-
+  .message-focus {
+    @apply focus-within:drop-shadow-[0_0_2px_#60A5FA] ease-in duration-200;
+  }
   .logo-effect {
     @apply drop-shadow-[0_0_5px_#60A5FA] hover:drop-shadow-[0_0_20px_#60A5FA] ease-in-out duration-1000;
   }
@@ -83,7 +85,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background-color: #0a0a0a;
+  background-color: #000000;
 }
 
 .leaflet-container {

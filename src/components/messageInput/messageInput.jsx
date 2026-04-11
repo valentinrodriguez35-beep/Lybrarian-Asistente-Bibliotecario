@@ -16,7 +16,9 @@ export default function MessageInput({ onSend }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full lg:w-175 min-h-fit max-h-40 rounded-3xl px-4 lg:px-2 pt-5 lg:pt-4 pb-3 bg-(--caja-mensaje) input-focus"
+      className="w-full lg:w-175 min-h-fit max-h-40 rounded-3xl 
+      px-4 lg:px-2 pt-5 lg:pt-4 pb-3 
+      border bg-(--caja-mensaje) border-slate-800 message-focus"
     >
       {/*Nueva version del message input*/}
       <textarea

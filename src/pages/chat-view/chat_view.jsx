@@ -2,7 +2,7 @@ import MessageBubble from "../../components/messageBubble/messageBubble";
 import ViewLayout from "../../layouts/ViewLayout";
 import MessagesContainer from "./Messages_Container/MessagesContainer";
 import DisclaimerFooter from "../../assets/icons/DisclaimerFooter";
-import MessageInput from "../../components/messageInput/messageInput";
+import MessageInput from "../../components/MessageInput/MessageInput";
 
 export default function ChatView({ messages, onSend }) {
   return (

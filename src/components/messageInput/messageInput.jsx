@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import SendIcon from "../../assets/SendIcon";
+import { useState } from "react";
 import ButtonLayout from "../sidebar/ButtonLayout/ButtonLayout";
-import SideBar from "../sidebar/sideBar";
+import SendIcon from "../../assets/icons/SendIcon";
 
 export default function MessageInput({ onSend }) {
   const [text, setText] = useState("");

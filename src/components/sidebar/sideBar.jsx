@@ -1,12 +1,10 @@
-import React from "react";
-import styles from "./sideBar.module.css";
-import MapButton from "../../assets/MapButton";
-import ExitButton from "../../assets/ExitButton";
-import HomeButton from "../../assets/HomeButton";
-import ThemeButton from "../../assets/ThemeButton";
 import { useNavigate } from "react-router";
 import { supabase } from "../../services/server/database/supabase";
 import ButtonLayout from "./ButtonLayout/ButtonLayout";
+import HomeButton from "../../assets/icons/HomeButton";
+import ThemeButton from "../../assets/icons/ThemeButton";
+import ExitButton from "../../assets/icons/ExitButton";
+import MapButton from "../../assets/icons/MapButton";
 
 export default function SideBar() {
   const navigate = useNavigate();

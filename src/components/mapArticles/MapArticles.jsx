@@ -1,5 +1,3 @@
-import React from "react";
-import styles from "../mapArticles/MapArticles.module.css";
 import ArticleLayout from "./articleLayout/ArticleLayout";
 
 export default function MapArticles() {

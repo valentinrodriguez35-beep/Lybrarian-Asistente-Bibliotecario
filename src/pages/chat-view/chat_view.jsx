@@ -1,8 +1,7 @@
-import React, { useState } from "react";
 import MessageBubble from "../../components/messageBubble/messageBubble";
 import ViewLayout from "../../layouts/ViewLayout";
 import MessagesContainer from "./Messages_Container/MessagesContainer";
-import DisclaimerFooter from "../../assets/DisclaimerFooter";
+import DisclaimerFooter from "../../assets/icons/DisclaimerFooter";
 import MessageInput from "../../components/messageInput/messageInput";
 
 export default function ChatView({ messages, onSend }) {

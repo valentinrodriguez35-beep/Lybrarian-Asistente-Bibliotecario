@@ -1,7 +1,3 @@
-import React from "react";
-import { Children } from "react";
-import { Outlet } from "react-router-dom";
-
 export default function ViewLayout({ children, className }) {
   return (
     <section className="flex flex-col h-full w-full overflow-hidden">

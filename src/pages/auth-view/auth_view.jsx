@@ -1,6 +1,5 @@
-import React from "react";
 import LogIn from "./log-in/log_in";
-import BrandGitHub from "../../assets/BrandGitHub";
+import BrandGitHub from "../../assets/icons/BrandGitHub";
 
 export default function AuthView() {
   return (

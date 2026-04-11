@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function ArticleLayout({ name, status, statusText }) {
   return (
     <article className="h-37.5 w-65 bg-(--info-tarjeta-color) border border-(--info-tarjeta-pressed) rounded-3xl px-5! py-5!">

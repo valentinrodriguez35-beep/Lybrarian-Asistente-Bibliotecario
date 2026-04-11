@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
-import styles from "../log-in/log_in.module.css";
+import { useState } from "react";
 import { supabase } from "../../../services/server/database/supabase";
 import { useNavigate } from "react-router";
-import Icon8Google from "../../../assets/icon8Google";
-import ProyectLogo from "../../../assets/ProyectLogo";
+import ProyectLogo from "../../../assets/icons/ProyectLogo";
+import Icon8Google from "../../../assets/icons/icon8Google";
 
 export default function LogIn() {
   const [email, setEmail] = useState("");

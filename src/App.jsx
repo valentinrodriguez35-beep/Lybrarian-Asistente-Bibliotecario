@@ -1,4 +1,4 @@
-import SystemLayout from "./layouts/SystemLayout";
+import SystemLayout from "./components/layouts/SystemLayout";
 import HomeView from "./pages/home-view/home_view";
 import ChatView from "./pages/chat-view/chat_view";
 import MapView from "./pages/map-view/map_view";
@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import NotFound from "./pages/pageNotFound-view/NotFound";
 import { supabase } from "./services/server/database/supabase";
 import AuthView from "./pages/auth-view/auth_view";
+import AuthLayout from "./components/layouts/AuthLayout";
 
 export default function App() {
   const navigate = useNavigate();
@@ -31,7 +32,9 @@ export default function App() {
 
   return (
     <Routes>
-      <Route path="/login" element={<AuthView />} />
+      <Route element={<AuthLayout />}>
+        <Route path="/login" element={<AuthView />} />
+      </Route>
       <Route element={<SystemLayout />}>
         <Route path="/" element={<HomeView onSend={handleSendMessage} />} />
         <Route

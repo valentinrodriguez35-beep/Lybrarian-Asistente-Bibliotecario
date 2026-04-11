@@ -1,20 +1,19 @@
-import LogIn from "./log-in/log_in";
-import BrandGitHub from "../../assets/icons/BrandGitHub";
+import LogIn from "../../components/features/LogIn/LogIn";
+import { BrandGitHub } from "../../components/icons";
+import ViewLayout from "../../components/layouts/ViewLayout";
 
 export default function AuthView() {
   return (
-    <section className="flex flex-col min-h-screen w-full justify-center-safe items-center-safe">
-      <div className="flex flex-1 w-full justify-center-safe items-center-safe">
-        <LogIn />
-      </div>
-      <footer className="py-4! md:py-6!">
-        <a className="flex flex-row gap-2 cursor-pointer text-center">
+    <ViewLayout className="flex flex-col justify-center items-center w-full px-4 animate-fade-in">
+      <footer className="flex py-4 md:py-6">
+        <a className="inline-flex flex-row gap-2 cursor-pointer text-center items-center justify-center">
           <BrandGitHub />
           <span className="text-gray-100 font-semibold">GitHub</span>
           <span className="text-gray-100 font-semibold">|</span>
           <span className="text-gray-200">Para mayor información.</span>
         </a>
       </footer>
-    </section>
+      <LogIn />
+    </ViewLayout>
   );
 }

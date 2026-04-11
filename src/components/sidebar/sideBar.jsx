@@ -1,10 +1,7 @@
 import { useNavigate } from "react-router";
 import { supabase } from "../../services/server/database/supabase";
 import ButtonLayout from "./ButtonLayout/ButtonLayout";
-import HomeButton from "../../assets/icons/HomeButton";
-import ThemeButton from "../../assets/icons/ThemeButton";
-import ExitButton from "../../assets/icons/ExitButton";
-import MapButton from "../../assets/icons/MapButton";
+import { HomeButton, MapButton, ThemeButton, ExitButton } from "../icons";
 
 export default function SideBar() {
   const navigate = useNavigate();

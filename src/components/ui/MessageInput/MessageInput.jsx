@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ButtonLayout from "../sidebar/ButtonLayout/ButtonLayout";
-import SendIcon from "../../assets/icons/SendIcon";
+import ButtonLayout from "../../sidebar/ButtonLayout/ButtonLayout";
+import { SendIcon } from "../../icons";
 
 export default function MessageInput({ onSend }) {
   const [text, setText] = useState("");
@@ -15,7 +15,7 @@ export default function MessageInput({ onSend }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full lg:w-175 min-h-fit max-h-40 rounded-3xl 
+      className="w-full lg:w-3xl min-h-fit max-h-40 rounded-3xl 
       px-4 lg:px-2 pt-5 lg:pt-4 pb-3 
       border bg-(--caja-mensaje) border-slate-800 message-focus"
     >

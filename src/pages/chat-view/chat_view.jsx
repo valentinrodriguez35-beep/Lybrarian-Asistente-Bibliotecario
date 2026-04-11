@@ -1,12 +1,16 @@
 import MessageBubble from "../../components/messageBubble/messageBubble";
-import ViewLayout from "../../layouts/ViewLayout";
+import ViewLayout from "../../components/layouts/ViewLayout";
 import MessagesContainer from "./Messages_Container/MessagesContainer";
-import DisclaimerFooter from "../../assets/icons/DisclaimerFooter";
-import MessageInput from "../../components/MessageInput/MessageInput";
+import MessageInput from "../../components/ui/MessageInput/MessageInput";
+import { DisclaimerFooter } from "../../components/icons";
+import HeaderResponsive from "../../components/ui/HeaderResponsive";
 
 export default function ChatView({ messages, onSend }) {
   return (
-    <ViewLayout className="flex flex-col items-center w-full px-4">
+    <ViewLayout className="flex flex-col justify-center items-center w-full px-4">
+      <header>
+        <HeaderResponsive />
+      </header>
       <MessagesContainer>
         {messages.map((msg, index) => (
           <MessageBubble text={msg.text} type={msg.type} key={index} />

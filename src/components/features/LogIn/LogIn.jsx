@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../../../services/server/database/supabase";
 import { useNavigate } from "react-router";
-import ProyectLogo from "../../../assets/icons/ProyectLogo";
-import Icon8Google from "../../../assets/icons/icon8Google";
+import { Icon8Google, ProyectLogo } from "../../icons";
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
@@ -47,11 +46,11 @@ export default function LogIn() {
   };
 
   return (
-    <section className="flex-1 flex flex-col w-full justify-center-safe items-center-safe gap-10 animate-fade-in animate-duration-500">
-      <div className="flex flex-col justify-center-safe items-center-safe ">
+    <section className="flex-1 flex flex-col w-full justify-center items-center gap-10 animate-fade-in animate-duration-500">
+      <div className="flex flex-col justify-center items-center">
         <ProyectLogo h="100" w="100" effect="logo-effect" />
       </div>
-      <div className="flex flex-col w-auto h-auto gap-4 justify-center-safe items-center-safe">
+      <div className="flex flex-col w-auto h-auto gap-4 justify-center items-center">
         <h1>
           <span className="text-[#93C5FD] font-bold text-4xl md:text-5xl text-center animate-fade-in-up">
             Lybrarian
@@ -74,7 +73,7 @@ export default function LogIn() {
               className="flex-1 bg-(--caja-mensaje) h-16 rounded-l-2xl border border-transparent whitespace-nowrap px-4!
                text-white font-normal text-[1rem] tracking-[1px] focus: ease-in-out duration-300 transition-colors"
             />
-            <div className="flex flex-col justify-center-safe h-16 rounded-r-2xl tracking-[1px] px-4 whitespace-nowrap bg-blue-900">
+            <div className="flex flex-col justify-center h-16 rounded-r-2xl tracking-[1px] px-4 whitespace-nowrap bg-blue-900">
               <span className="text-white font-normal text-[1rem] ">
                 @uabc.edu.mx
               </span>

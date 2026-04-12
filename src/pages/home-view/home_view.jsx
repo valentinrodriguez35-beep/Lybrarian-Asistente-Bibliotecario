@@ -5,7 +5,7 @@ import { HomeLogo } from "../../components/icons";
 
 export default function HomeView({ onSend }) {
   return (
-    <ViewLayout className="flex flex-col w-full justify-center p-4 animate-fade-in transition-all ease-in">
+    <ViewLayout className="flex flex-col w-full justify-center p-4 overflow-hidden animate-fade-in transition-all ease-in">
       <header>
         <HeaderResponsive />
       </header>

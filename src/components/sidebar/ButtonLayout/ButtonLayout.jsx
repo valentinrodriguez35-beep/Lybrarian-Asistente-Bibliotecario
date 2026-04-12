@@ -16,7 +16,7 @@ export default function ButtonLayout({
       <div className="inline-flex flex-row items-center gap-3 h-full py-2">
         {children}
         <span
-          className={`text-[16px] font-medium text-hover hidden lg:block ${label_style}`}
+          className={`text-[16px] font-medium text-hover hidden xl:block ${label_style}`}
         >
           {label}
         </span>

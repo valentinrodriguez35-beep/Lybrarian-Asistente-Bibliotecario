@@ -1,13 +1,13 @@
-import { MenuButton } from "../icons";
+import { HomeButton, MenuButton } from "../icons";
 import ButtonLayout from "../sidebar/ButtonLayout/ButtonLayout";
 
-export default function HeaderResponsive() {
+export default function HeaderResponsive({ children }) {
   return (
-    <div className="flex flex-row items-center w-full lg:hidden gap-3">
+    <div className="lg:hidden flex flex-row justify-between items-center w-full px-2">
       <ButtonLayout>
-        <MenuButton />
+        <MenuButton fill_col="fill-(--sb-button-iddle)" />
       </ButtonLayout>
-      <h1 className="text-2xl font-semibold pb-1 text-amber-50">Lybrarian</h1>
+      {children}
     </div>
   );
 }

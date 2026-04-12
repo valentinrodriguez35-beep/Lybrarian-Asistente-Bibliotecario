@@ -4,8 +4,8 @@ export default function ThemeButton({ fill_col = "white" }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      height="28"
-      width="28"
+      height="35px"
+      width="35px"
       viewBox="0 -960 960 960"
       className={fill_col}
     >

@@ -15,9 +15,9 @@ export default function SideBar() {
   };
 
   return (
-    <aside className="hidden sm:flex flex-col w-fit p-6 h-screen bg-(--sidebar-color) border-r border-r-gray-800 transition-transform duration-300 ease-in">
-      <nav className="flex flex-col flex-1 w-full items-start justify-between">
-        <div className="flex flex-col h-auto">
+    <aside className="hidden lg:flex flex-col w-fit p-6 h-screen bg-(--sidebar-color) border-r border-r-gray-800 transition-transform duration-300 ease-in">
+      <nav className="flex flex-col  flex-1 w-full items-start justify-between">
+        <div className="flex flex-col h-auto gap-4">
           <ButtonLayout
             type={"button"}
             onClick={() => handleClick("home")}
@@ -37,7 +37,7 @@ export default function SideBar() {
           </ButtonLayout>
         </div>
 
-        <div className="flex flex-col justify-between w-full h-auto pb-2 gap-3">
+        <div className="flex flex-col h-auto gap-4">
           <ButtonLayout
             type={"button"}
             onClick={() => handleClick("theme")}

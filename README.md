@@ -1,5 +1,5 @@
 # Lybrarian | Asistente Bibliotecario
-<div align="center" style="gap: 1rem;">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
   <span style="font-weight: bold;">
     Chatbot de asistencia para la consulta de disponibilidad física de material bibliográfico.
   </span>

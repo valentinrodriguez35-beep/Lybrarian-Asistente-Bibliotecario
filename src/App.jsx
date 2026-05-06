@@ -9,6 +9,7 @@ import NotFound from "./pages/pageNotFound-view/NotFound";
 import { supabase } from "./services/server/database/supabase";
 import AuthView from "./pages/auth-view/auth_view";
 import AuthLayout from "./components/layouts/AuthLayout";
+import { send_request } from "./services/api";
 
 export default function App() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function App() {
     const newMessage = { text, type: "USER" };
     setMessages((prev) => [...prev, newMessage]);
 
-    console.log("Mensaje cargado" + text);
+    send_request(text);
     navigate("/chat");
   };
 

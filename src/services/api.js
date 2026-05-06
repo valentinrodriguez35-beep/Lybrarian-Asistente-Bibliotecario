@@ -2,7 +2,7 @@ export async function send_request(message) {
   //Funcion que envia una solicitud HTTP al servidor NodeJS
   try {
     console.log("Mensaje cargado en el front-end: " + message);
-    const response = await fetch("/chat", {
+    const response = await fetch("http://localhost:3000/chat", {
       method: "POST",
       body: JSON.stringify({ message: message }),
       headers: {

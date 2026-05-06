@@ -1,20 +1,28 @@
 import express from "express";
 import logger from "morgan";
+<<<<<<< HEAD
 import { assistantRequest } from "./api/gemini/ai_logic.js";
 import cors from "cors";
+=======
+import cors from "cors";
+//import { assistantRequest } from "./services/gemini-api/ai_logic.js";
+>>>>>>> ca1995732dafefc665fd592eb2f9defc43c4ff62
 
 const port = process.env.PORT ?? 3000;
 const app = express();
-
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.static(process.cwd() + "/public"));
 app.use(cors())
 
+//Enabling CORS
+app.use(cors());
+
 app.post("/chat", async (req, res) => {
   let message_body = req.body.message;
   console.log("Mensaje ha llegado al back-end: " + message_body);
   //send message to AI
+  /*
   const ai_result = await assistantRequest(message_body);
   if (!ai_result.success) {
     console.log(
@@ -52,6 +60,7 @@ app.post("/chat", async (req, res) => {
       .status(500)
       .json({ error: "IA no ha respondido correctamente." });
   }
+      */
 });
 
 app.get("/", (req, res) => {

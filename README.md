@@ -1,8 +1,11 @@
 # Lybrarian | Asistente Bibliotecario
+<div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+  <span style="font-weight: bold;">
+    Chatbot de asistencia para la consulta de disponibilidad física de material bibliográfico.
+  </span>
+  <img width="992" height="426" alt="image" src="https://github.com/user-attachments/assets/80133528-1b8c-456f-aef8-9934e8e7b130" />
+</div>
 
-#### Chatbot de asistencia para la consulta de disponibilidad física de material bibliográfico.
-
-<img width="992" height="426" alt="image" src="https://github.com/user-attachments/assets/80133528-1b8c-456f-aef8-9934e8e7b130" />
 
 *[ScreenShot] de fragmento perteneciente a la **pantalla principal** (**Inicio / Home**) para realizar una consulta.*
 

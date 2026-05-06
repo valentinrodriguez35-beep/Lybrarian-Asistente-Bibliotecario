@@ -1,6 +1,7 @@
 import express from "express";
 import logger from "morgan";
-import { assistantRequest } from "./services/gemini-api/ai_logic.js";
+import { assistantRequest } from "./api/gemini/ai_logic.js";
+import cors from "cors";
 
 const port = process.env.PORT ?? 3000;
 const app = express();
@@ -8,6 +9,7 @@ const app = express();
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.static(process.cwd() + "/public"));
+app.use(cors())
 
 app.post("/chat", async (req, res) => {
   let message_body = req.body.message;
@@ -42,7 +44,7 @@ app.post("/chat", async (req, res) => {
   }
   //send AI Json to Koha's API to find coincidences
   try {
-    let ai_response = JSON.parse(ai_result);
+    let ai_response = ai_result;
     console.log(ai_response);
   } catch (error) {
     console.error("JSON invalido: ", ai_result);
@@ -53,7 +55,7 @@ app.post("/chat", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(process.cwd() + "/public/index.html");
+  res.sendFile(process.cwd() + "/index.html");
 });
 
 app.listen(port, () => {

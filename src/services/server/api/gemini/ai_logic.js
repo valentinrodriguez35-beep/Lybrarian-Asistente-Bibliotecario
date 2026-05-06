@@ -1,5 +1,8 @@
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
+import dotenv from "dotenv";
 
+
+dotenv.config();
 const ai = new GoogleGenerativeAI(process.env.GEMINI_KEY);
 
 const schema = {
@@ -58,7 +61,7 @@ const schema = {
 export async function assistantRequest(message) {
   try {
     const model = await ai.getGenerativeModel({
-      model: "gemini-1.5-flash",
+      model: "gemini-2.5-flash",
       generationConfig: {
         responseMimeType: "application/json",
         responseSchema: schema,
@@ -73,6 +76,7 @@ export async function assistantRequest(message) {
       data: dataResponse,
     };
   } catch (error) {
+    console.error("Error con inteligencia artificial: " + error);
     return {
       success: false,
     };
@@ -116,8 +120,8 @@ export const aiResponse = async (message, metadata, resultado_de_consulta) => {
   
   ### DATOS A PROCESAR:
   CONSULTA: "${message}"
-  METADADA: "${JSON.stringify.metadata}"
-  RESULTADO_DE_CONSULTA: "${JSON.stringify.resultado_de_consulta}"
+  METADADA: "${JSON.stringify(metadata)}"
+  RESULTADO_DE_CONSULTA: "${JSON.stringify(resultado_de_consulta)}"
   `;
 
   const aiResult = await model.generateContent(request);

@@ -9,12 +9,11 @@ export default function LogIn() {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
     //En caso de que el usuario haya anotado un arroba
     if (email.includes("@")) {
-      console.log(
-        `${email}@uabc.edu.mx` +
-          " Es un formato invalido de correo electronico.",
-      ); //Debugging
+      setError("Ingresar solamente nombre de usuario. @uabc.edu.mx ya se encuentra incluido.");
+      return;
     }
     const userEmail = `${email}@uabc.edu.mx`; //Concatenamos con el dominio
     try {

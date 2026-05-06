@@ -14,14 +14,17 @@ import { send_request } from "./services/api";
 export default function App() {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
+  const [loading ,setLoading] = useState(true);
+
   const session = supabase.auth.getSession();
   useEffect(() => {
-    supabase.auth.onAuthStateChange(() => {
+    supabase.auth.onAuthStateChange((event, session) => {
       if (!session) {
         navigate("/login");
       }
+      setLoading(true)
     });
-  }, [session, navigate]);
+  }, [navigate]);
 
   const handleSendMessage = (text) => {
     const newMessage = { text, type: "USER" };
@@ -30,6 +33,14 @@ export default function App() {
     send_request(text);
     navigate("/chat");
   };
+
+  if(loading){
+    return <div className="flex flex-col justify-center items-center w-dvw h-dvh bg-zinc-950">
+      <h1 className="text-indigo-100 text-2xl">
+        Cargando...
+      </h1>
+      </div> //Crear loading
+  }
 
   return (
     <Routes>

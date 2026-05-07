@@ -17,8 +17,8 @@ export default function App() {
   const { sendMessage, messages, error, chatLoading } = useChat();
 
   const handleSendMessage = async (text) => {
-    await sendMessage(text);
     navigate("/chat");
+    await sendMessage(text);
   };
 
   if (chatLoading || authLoading) {

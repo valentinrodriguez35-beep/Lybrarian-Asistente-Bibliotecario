@@ -14,7 +14,7 @@ import { send_request } from "./services/api";
 export default function App() {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
-  const [loading ,setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const session = supabase.auth.getSession();
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function App() {
       if (!session) {
         navigate("/login");
       }
-      setLoading(true)
+      setLoading(false);
     });
   }, [navigate]);
 
@@ -34,12 +34,12 @@ export default function App() {
     navigate("/chat");
   };
 
-  if(loading){
-    return <div className="flex flex-col justify-center items-center w-dvw h-dvh bg-zinc-950">
-      <h1 className="text-indigo-100 text-2xl">
-        Cargando...
-      </h1>
-      </div> //Crear loading
+  if (loading) {
+    return (
+      <div className="flex flex-col justify-center items-center w-dvw h-dvh bg-zinc-950">
+        <h1 className="text-indigo-100 text-2xl">Cargando...</h1>
+      </div>
+    ); //Crear loading
   }
 
   return (

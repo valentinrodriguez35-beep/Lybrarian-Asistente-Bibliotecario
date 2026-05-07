@@ -9,7 +9,7 @@ export async function send_request(message) {
         "Content-Type": "application/json",
       },
     });
-    
+
     if (!response.ok)
       throw new Error(
         "ERROR! No se ha podido establecer comunicación con el servidor.",

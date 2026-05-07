@@ -1,1 +1,1 @@
-export function useView(view) {}
+function useView() {}

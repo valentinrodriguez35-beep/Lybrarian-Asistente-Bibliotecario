@@ -16,12 +16,9 @@ app.post("/chat", async (req, res) => {
   //send message to AI
   const ai_result = await assistantRequest(message_body);
   if (!ai_result.success) {
-    console.log(
-      "IA no ha respondido correctamente | resultado vacio o indefinido.",
+    throw new Error(
+      "Fallo en generacion de resultado por la Inteligencia Artificial",
     );
-    return res
-      .status(500)
-      .json({ error: "IA no ha respondido correctamente." });
   }
 
   //Get data from AI response
@@ -46,10 +43,7 @@ app.post("/chat", async (req, res) => {
     let ai_response = ai_result;
     console.log(ai_response);
   } catch (error) {
-    console.error("JSON invalido: ", ai_result);
-    return res
-      .status(500)
-      .json({ error: "IA no ha respondido correctamente." });
+    return res.status(500).json({ response: error.message });
   }
 });
 

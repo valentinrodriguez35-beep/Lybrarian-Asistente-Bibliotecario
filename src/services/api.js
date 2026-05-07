@@ -10,23 +10,19 @@ export async function send_request(message) {
       },
     });
 
-    if (!response.ok)
-      throw new Error(
-        "ERROR! No se ha podido establecer comunicación con el servidor.",
-      );
-
     const data = await response.json();
     // Aquí es donde recibes lo que enviamos desde el backend
     console.log("Respuesta de la IA recibida: ", data);
     return {
       rol: "AI",
-      body: JSON.stringify(data),
+      body: data.response,
     };
   } catch (error) {
     console.error("Error al recibir mensaje del servidor");
     return {
       error: true,
-      message: "Error al establecer conexión con Bibliotecario",
+      rol: "AI",
+      body: "Error al establecer conexión con Bibliotecario",
     };
   }
 }

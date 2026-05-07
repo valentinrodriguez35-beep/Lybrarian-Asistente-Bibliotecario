@@ -1,2 +1,2 @@
-export { useView } from "./useView";
 export { useAuth } from "./useAuth";
+export { useChat } from "./useChat";

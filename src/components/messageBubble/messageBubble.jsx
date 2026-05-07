@@ -1,6 +1,5 @@
 import Markdown from "react-markdown";
 import styles from "./messageBubble.module.css";
-import ReactMarkdown from "react-markdown";
 
 export default function messageBubble({ text, type }) {
   const isAI = type === "AI";

@@ -42,7 +42,7 @@ const books = [
     author: "George Orwell",
     isbn: "9788499890944",
     year: 1949,
-    location: "Piso 1",
+    location: "Biblioteca Central Tijuana",
     total_items: 1,
     available: 1,
   },
@@ -52,7 +52,7 @@ const books = [
     author: "Frank Herbert",
     isbn: "9788466338295",
     year: 1965,
-    location: "Piso 2",
+    location: "Biblioteca Central Mexicali",
     total_items: 3,
     available: 2,
   },
@@ -62,7 +62,7 @@ const books = [
     author: "J.R.R. Tolkien",
     isbn: "9788445071434",
     year: 1954,
-    location: "Piso 1",
+    location: "Biblioteca Central Tijuana",
     total_items: 4,
     available: 2,
   },
@@ -72,7 +72,7 @@ const books = [
     author: "J.K. Rowling",
     isbn: "9788478884452",
     year: 1997,
-    location: "Piso 2",
+    location: "Biblioteca Central Mexicali",
     total_items: 5,
     available: 3,
   },
@@ -82,7 +82,7 @@ const books = [
     author: "Ray Bradbury",
     isbn: "9788445077092",
     year: 1953,
-    location: "Piso 3",
+    location: "Biblioteca Valle Dorado",
     total_items: 2,
     available: 1,
   },
@@ -92,7 +92,7 @@ const books = [
     author: "Fiódor Dostoyevski",
     isbn: "9788420674223",
     year: 1866,
-    location: "Piso 3",
+    location: "Biblioteca Valle Dorado",
     total_items: 1,
     available: 0,
   },
@@ -102,7 +102,7 @@ const books = [
     author: "Antoine de Saint-Exupéry",
     isbn: "9788498381498",
     year: 1943,
-    location: "Piso 1",
+    location: "Biblioteca Central Tijuana",
     total_items: 6,
     available: 4,
   },
@@ -112,7 +112,7 @@ const books = [
     author: "Miguel de Cervantes",
     isbn: "9788467032185",
     year: 1605,
-    location: "Piso 3",
+    location: "Biblioteca Valle Dorado",
     total_items: 3,
     available: 1,
   },
@@ -122,7 +122,7 @@ const books = [
     author: "Yuval Noah Harari",
     isbn: "9788499926223",
     year: 2011,
-    location: "Piso 2",
+    location: "Biblioteca Central Mexicali",
     total_items: 2,
     available: 2,
   },
@@ -132,7 +132,7 @@ const books = [
     author: "Dan Brown",
     isbn: "9788408176091",
     year: 2003,
-    location: "Piso 1",
+    location: "Biblioteca Central Tijuana",
     total_items: 3,
     available: 0,
   },
@@ -142,7 +142,7 @@ const books = [
     author: "Jane Austen",
     isbn: "9788467033793",
     year: 1813,
-    location: "Piso 3",
+    location: "Biblioteca Valle Dorado",
     total_items: 2,
     available: 1,
   },
@@ -152,7 +152,7 @@ const books = [
     author: "Paulo Coelho",
     isbn: "9788408052944",
     year: 1988,
-    location: "Piso 1",
+    location: "Biblioteca Central Tijuana",
     total_items: 4,
     available: 3,
   },
@@ -162,7 +162,7 @@ const books = [
     author: "Jorge Luis Borges",
     isbn: "9788420633138",
     year: 1944,
-    location: "Piso 3",
+    location: "Biblioteca Valle Dorado",
     total_items: 1,
     available: 1,
   },
@@ -172,7 +172,7 @@ const books = [
     author: "Orson Scott Card",
     isbn: "9788498890945",
     year: 1985,
-    location: "Piso 2",
+    location: "Biblioteca Central Mexicali",
     total_items: 2,
     available: 1,
   },
@@ -182,7 +182,7 @@ const books = [
     author: "William Gibson",
     isbn: "9788466662574",
     year: 1984,
-    location: "Piso 2",
+    location: "Biblioteca Central Mexicali",
     total_items: 1,
     available: 0,
   },
@@ -192,7 +192,7 @@ const books = [
     author: "Toni Morrison",
     isbn: "9780307740922",
     year: 1987,
-    location: "Piso 3",
+    location: "Biblioteca Valle Dorado",
     total_items: 2,
     available: 2,
   },
@@ -202,53 +202,34 @@ const books = [
     author: "Juan Rulfo",
     isbn: "9786071600004",
     year: 1955,
-    location: "Piso 1",
+    location: "Biblioteca Central Tijuana",
     total_items: 3,
     available: 2,
   },
 ];
 
-app.post("/api/mock", async (req, res) => {
-  let message_body = req.body.message;
-  console.log("Mensaje ha llegado al back-end: " + message_body);
-  //send message to AI
-  const ai_result = await assistantRequest(message_body);
-  if (!ai_result.success) {
-    throw new Error(
-      "Fallo en generacion de resultado por la Inteligencia Artificial",
+app.get("/api/v1/biblios/search", (req, res) => {
+  const { q, author, isbn } = req.query;
+
+  let results = books;
+
+  if (q) {
+    results = results.filter((b) =>
+      b.title.toLowerCase().includes(q.toLowerCase()),
     );
   }
-
-  //Get data from AI response
-  const messageData = ai_result.data;
-  if (messageData.is_ambiguous) {
-    return res.json({
-      response:
-        "La consulta que haz realizado es muy ambigua para poder ser respondida de forma esclarecedora, ¿Podrías proporcionamre más información del material que buscas?",
-      metadata: messageData,
-    });
+  if (author) {
+    results = results.filter((b) =>
+      b.author.toLowerCase().includes(author.toLowerCase()),
+    );
+  }
+  if (isbn) {
+    results = results.filter((b) => b.isbn === isbn);
   }
 
-  if (messageData.intent === "unsupported_request") {
-    return res.json({
-      response:
-        "Lo siento. La consulta o respuesta que haz enviado se encuentra fuera del contexto de la aplicación.",
-      metadata: messageData,
-    });
-  }
-  //send AI Json to Koha's API to find coincidences
-  try {
-    let ai_response = ai_result;
-    console.log(ai_response);
-  } catch (error) {
-    return res.status(500).json({ response: error.message });
-  }
-});
-
-app.get("/", (req, res) => {
-  res.sendFile(process.cwd() + "/index.html");
+  return res.json({ total: results.length, results });
 });
 
 app.listen(port, () => {
-  console.log(`Server corriendo en el puerto ${port}`);
+  console.log(`Mock Koha corriendo en el puerto ${port}`);
 });

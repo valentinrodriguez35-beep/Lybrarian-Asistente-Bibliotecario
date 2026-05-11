@@ -40,8 +40,30 @@ app.post("/chat", async (req, res) => {
   }
   //send AI Json to Koha's API to find coincidences
   try {
-    let ai_response = ai_result;
-    console.log(ai_response);
+    const ai_response = ai_result;
+    console.log("AI Response to question:" + ai_response);
+    const queryParams = buildQuery(ai_response);
+
+    //Fetch request to Koha API (Mocked)
+    const kohaQuery = await fetch(
+      `http://localhost:4000/api/v1/biblios/search?${queryParams}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    console.log("KOHA Response to query:" + kohaQuery);
+
+    //Send Koha query response to AI one again
+
+    console ai_message = await assistantRequest();
+    return res.json({
+      response: kohaQuery,
+      metadata: messageData,
+    });
   } catch (error) {
     return res.status(500).json({ response: error.message });
   }
@@ -54,3 +76,14 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Server corriendo en el puerto ${port}`);
 });
+
+function buildQuery(message) {
+  const queryParams = new URLSearchParams();
+  if (message.title) queryParams.append("q", message.title);
+  if (message.author) queryParams.append("author", message.author);
+  if (message.theme) queryParams.append("q", message.theme);
+  if (message.isbn) queryParams.append("isbn", message.title);
+  if (message.id) queryParams.append("biblionumber", message.title);
+
+  return queryParams;
+}

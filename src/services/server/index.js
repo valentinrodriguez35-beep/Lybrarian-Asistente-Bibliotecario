@@ -1,6 +1,6 @@
 import express from "express";
 import logger from "morgan";
-import { assistantRequest } from "./api/gemini/ai_logic.js";
+import { assistantRequest, aiResponse } from "./api/gemini/ai_logic.js";
 import cors from "cors";
 
 const port = process.env.PORT ?? 3000;
@@ -42,7 +42,7 @@ app.post("/chat", async (req, res) => {
   try {
     const ai_response = ai_result;
     console.log("AI Response to question:" + ai_response);
-    const queryParams = buildQuery(ai_response);
+    const queryParams = buildQuery(messageData);
 
     //Fetch request to Koha API (Mocked)
     const kohaQuery = await fetch(
@@ -55,13 +55,12 @@ app.post("/chat", async (req, res) => {
       },
     );
 
-    console.log("KOHA Response to query:" + kohaQuery);
-
     //Send Koha query response to AI one again
-
-    console ai_message = await assistantRequest();
+    const kohaData = await kohaQuery.json();
+    console.log("KOHA Response to query:" + kohaData);
+    const ai_message = await aiResponse(message_body, messageData, kohaData);
     return res.json({
-      response: kohaQuery,
+      response: ai_message.data,
       metadata: messageData,
     });
   } catch (error) {
@@ -82,8 +81,8 @@ function buildQuery(message) {
   if (message.title) queryParams.append("q", message.title);
   if (message.author) queryParams.append("author", message.author);
   if (message.theme) queryParams.append("q", message.theme);
-  if (message.isbn) queryParams.append("isbn", message.title);
-  if (message.id) queryParams.append("biblionumber", message.title);
+  if (message.isbn) queryParams.append("isbn", message.isbn);
+  if (message.id) queryParams.append("biblionumber", message.id);
 
   return queryParams;
 }

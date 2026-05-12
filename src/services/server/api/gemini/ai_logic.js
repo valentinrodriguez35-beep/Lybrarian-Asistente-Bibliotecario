@@ -54,10 +54,16 @@ const schema = {
         "TRUE solo si la consulta realizada por el usuario es muy general, de manera que tiene muchas interpretaciones.",
     },
   },
-  required: ["intent", "author", "theme", "isbn", "id", "is_ambiguous"],
+  required: ["intent", "title", "author", "theme", "isbn", "id", "is_ambiguous"],
 };
 
 export async function assistantRequest(message) {
+  if(!message || typeof message !== "string" || message.trim().length === 0)
+    return {
+      success: false,
+      error:"empty user message",
+    }
+
   try {
     const model = await ai.getGenerativeModel({
       model: "gemini-2.5-flash",
@@ -83,8 +89,20 @@ export async function assistantRequest(message) {
 }
 
 export const aiResponse = async (message, metadata, resultado_de_consulta) => {
+  //Limit the results to five coincidences
+  const results = Array.isArray(resultado_de_consulta) ? resultado_de_consulta :  (resultado_de_consulta?.results || []);
+
+  const limitedResults = results.slice(0, 5);
+  
+  const resultsAbstract = limitedResults.map(b => ({
+    title: b.title,
+    author: b.author,
+    available: b.available,
+    location: b.location,
+  }));
+
   try {
-    const model = ai.getGenerativeModel({
+    const model = await ai.getGenerativeModel({
       model: "gemini-2.5-flash",
     });
     const request = `
@@ -112,7 +130,6 @@ export const aiResponse = async (message, metadata, resultado_de_consulta) => {
   Un usuario realizo una CONSULTA, el sistema genero un resultado, ese resultado paso por una API y se devolvio un RESULTADO_DE_CONSULTA.
   ese RESULTADO_DE_CONSULTA contiene lo que la propia API devolvio como informacion de la consulta que hizo el usuario. Con "consulta" me
   refiero al material bibliografico que este mismo usuario quiso buscar, estas instrucciones deberas tomarlas en cuenta para lo siguiente:
-  - En caso de que RESULTADO_DE_CONSULTA presente una cantidad mayor a 5 objetos, solo deberas de tomar 5 objetos de manera aleatoria.
   - En caso de que RESULTADO_DE_CONSULTA indique que no hay coindicencias de busqueda (no hay libros de lo que este mismo usuario busco), recomiendale
     que realice una nueva consulta con informacion que tu consideres que podria parecerse a lo que esta buscando.
   Debes mantener un caracter amable y gentil.
@@ -121,7 +138,7 @@ export const aiResponse = async (message, metadata, resultado_de_consulta) => {
   ### DATOS A PROCESAR:
   CONSULTA: ${message}
   METADATA: ${JSON.stringify(metadata)}
-  RESULTADO_DE_CONSULTA: ${JSON.stringify(resultado_de_consulta)}
+  RESULTADO_DE_CONSULTA: ${JSON.stringify(resultsAbstract)}
   `;
 
     const aiResult = await model.generateContent(request);
@@ -130,8 +147,10 @@ export const aiResponse = async (message, metadata, resultado_de_consulta) => {
       data: aiResult.response.text(),
     };
   } catch (error) {
+    console.error("Fallo en la generacion de mensaje por parte de la IA", error);
     return {
       success: false,
+      error: error.message,
     };
   }
 };

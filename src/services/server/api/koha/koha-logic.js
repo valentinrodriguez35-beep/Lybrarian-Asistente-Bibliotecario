@@ -1,9 +1,13 @@
 //Mock server --> Made it for testing
 import express from "express";
 import logger from "morgan";
+import dotenv from "dotenv";
 
-const port = 4000;
+dotenv.config();
+const port = process.env.KOHA_PORT;
 const app = express();
+app.use(logger("dev"));
+app.use(express.json());
 
 const books = [
   {
@@ -209,10 +213,13 @@ const books = [
 ];
 
 app.get("/api/v1/biblios/search", (req, res) => {
-  const { q, author, isbn } = req.query;
+  const { q, author, isbn, biblionumber } = req.query;
 
   let results = books;
 
+  if (biblionumber){
+    results = results.filter((b) => b.biblionumber === biblionumber);
+  }
   if (q) {
     results = results.filter((b) =>
       b.title.toLowerCase().includes(q.toLowerCase()),

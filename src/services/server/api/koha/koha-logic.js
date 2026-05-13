@@ -4,7 +4,7 @@ import logger from "morgan";
 import dotenv from "dotenv";
 
 dotenv.config();
-const port = process.env.KOHA_PORT;
+const port = process.env.KOHA_PORT ?? 4000;
 const app = express();
 app.use(logger("dev"));
 app.use(express.json());
@@ -217,7 +217,7 @@ app.get("/api/v1/biblios/search", (req, res) => {
 
   let results = books;
 
-  if (biblionumber){
+  if (biblionumber) {
     results = results.filter((b) => b.biblionumber === biblionumber);
   }
   if (q) {

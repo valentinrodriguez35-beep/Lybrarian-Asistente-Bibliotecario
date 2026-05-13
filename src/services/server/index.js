@@ -5,7 +5,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 dotenv.config();
-const port = process.env.PORT ?? 3000;
+const port = process.env.SERVER_PORT ?? 3000;
+const kohaUrl = process.env.KOHA_API_URL ?? "http://localhost:4000/api/v1/biblios/search?"
 const app = express();
 app.use(logger("dev"));
 app.use(express.json());
@@ -17,7 +18,9 @@ app.post("/chat", async (req, res) => {
   //send message to AI
   const ai_result = await assistantRequest(message_body);
   if (!ai_result.success) {
-    return res.status(500).json({ response: "Fallo en Inteligencia Artificial"});
+    if (ai_result.status === 429)
+      return res.status(429).json({ response: "Estamos presentando problemas de saturacion. Favor de intentar mas tarde" });
+    return res.status(500).json({ response: "Fallo en Inteligencia Artificial" });
   }
 
   //Get data from AI response & send it to Koha's API to find coincidences
@@ -27,7 +30,7 @@ app.post("/chat", async (req, res) => {
 
     //Fetch request to Koha API (Mocked)
     const kohaQuery = await fetch(
-      `${process.env.KOHA_API_URL}/biblios/search?${queryParams}`,
+      `${kohaUrl}${queryParams}`,
       {
         method: "GET",
         headers: {
@@ -36,15 +39,17 @@ app.post("/chat", async (req, res) => {
       },
     );
 
-    if(!kohaQuery.ok){
-      return res.status(500).json({ response: "Fallo en establecer conexion con Koha API [MOCKED]"});
+    if (!kohaQuery.ok) {
+      return res.status(500).json({ response: "Fallo en establecer conexion con Koha API [MOCKED]" });
     }
     //Send Koha query response to AI one again
     const kohaData = await kohaQuery.json();
     const ai_message = await aiResponse(message_body, messageData, kohaData.results);
 
-    if(!ai_message.success){
-      return res.status(500).json({response:"Fallo en comunicarse con Inteligencia Artificial"});
+    if (!ai_message.success) {
+      if (ai_message.status === 429)
+        return res.status(429).json({ response: "Estamos presentando problemas de saturacion. Favor de intentar mas tarde" });
+      return res.status(500).json({ response: "Fallo en comunicarse con Inteligencia Artificial" });
     }
 
     return res.json({

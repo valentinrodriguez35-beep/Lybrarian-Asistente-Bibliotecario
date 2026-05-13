@@ -58,10 +58,10 @@ const schema = {
 };
 
 export async function assistantRequest(message) {
-  if(!message || typeof message !== "string" || message.trim().length === 0)
+  if (!message || typeof message !== "string" || message.trim().length === 0)
     return {
       success: false,
-      error:"empty user message",
+      error: "empty user message",
     }
 
   try {
@@ -81,8 +81,10 @@ export async function assistantRequest(message) {
       data: dataResponse,
     };
   } catch (error) {
-    console.error("Error con inteligencia artificial: " + error);
+    console.error("Error con inteligencia artificial: ", error);
     return {
+      status: 429,
+      error: error.message,
       success: false,
     };
   }
@@ -90,10 +92,10 @@ export async function assistantRequest(message) {
 
 export const aiResponse = async (message, metadata, resultado_de_consulta) => {
   //Limit the results to five coincidences
-  const results = Array.isArray(resultado_de_consulta) ? resultado_de_consulta :  (resultado_de_consulta?.results || []);
+  const results = Array.isArray(resultado_de_consulta) ? resultado_de_consulta : (resultado_de_consulta?.results || []);
 
   const limitedResults = results.slice(0, 5);
-  
+
   const resultsAbstract = limitedResults.map(b => ({
     title: b.title,
     author: b.author,
@@ -105,7 +107,8 @@ export const aiResponse = async (message, metadata, resultado_de_consulta) => {
     const model = await ai.getGenerativeModel({
       model: "gemini-2.5-flash",
     });
-    const request = `
+    const request = `/Response en formato Markdown, empleando tanto headers 
+                      (##, ###, etc.), negritas (** **), italic (* *) 
   ### ROL
   Eres un bibliotecario, por ende, actuaras con amabilidad y gentileza.
   
@@ -149,6 +152,7 @@ export const aiResponse = async (message, metadata, resultado_de_consulta) => {
   } catch (error) {
     console.error("Fallo en la generacion de mensaje por parte de la IA", error);
     return {
+      status: 429,
       success: false,
       error: error.message,
     };

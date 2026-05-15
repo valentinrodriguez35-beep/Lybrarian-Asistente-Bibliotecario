@@ -1,37 +1,38 @@
 const serverUrl = import.meta.env.SERVER_URL ?? "http://localhost:3000/chat"
-export async function send_request(message) {
-  //Funcion que envia una solicitud HTTP al servidor NodeJS
-  try {
-    console.log("Mensaje cargado en el front-end: " + message);
-    const serverResponse = await fetch(`${serverUrl}`, {
-      method: "POST",
-      body: JSON.stringify({ message: message }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
 
-    if (!serverResponse.ok) {
-      return {
-        rol: "AI",
-        body: serverResponse.response,
-        error: true,
-      }
+export async function send_request(message, {onChunk, onError, onStatus, onResult}) {
+  //Enviar y recibir datos mediante el event sourcing
+  const url = `${serverUrl}/stream?message=${encodeURIComponent(message)}`
+  const event_source = new EventSource(url); //Establecer conexion permanente con servidor Back-End por Streaming
+
+  event_source.addEventListener("status", (event) =>{
+    const {step} = JSON.parse(event.data) || {step: "idle"};
+    console.log("Estado actual: " + step);
+    if(step === "Message Failure" || step === "Extracting Failure" || step === "Searching Failure" || step === "Responding Failure"){
+      console.log("Fallo!");
+      onError(step);
+      event_source.close();
     }
+    else if(step === "Succeded"){
+      console.log("Procesando...!");
+      onStatus(step);
+      event_source.close();
+    }
+    else{
+      console.log("Procesando...!");
+      onStatus(step);
+    }
+  })
 
-    const data = await serverResponse.json();
-    // Aquí es donde recibes lo que enviamos desde el backend
-    return {
-      rol: "AI",
-      body: data.response,
-      error: false,
-    };
-  } catch (error) {
-    console.error("Error al recibir mensaje del servidor");
-    return {
-      rol: "AI",
-      body: "Error en servidor",
-      error: true,
-    };
-  }
+  event_source.addEventListener("chunk", (event) =>{
+    const {text} = JSON.parse(event.data) || {text: " "};
+    console.log(text);
+    onChunk(text);
+  });
+
+  event_source.addEventListener("result", (event) => {
+    const {item} = JSON.parse(event.data) || {item: " "};
+    console.log(item);
+    onResult(item);
+  });
 }

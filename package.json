@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "server": "node --watch src/services/server/index.js",
-    "mock": "node --watch src/services/server/api/koha/koha-logic.js",
+    "mock": "node --watch src/services/server/api/mock_biblios/koha_logic.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

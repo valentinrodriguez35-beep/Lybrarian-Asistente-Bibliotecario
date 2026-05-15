@@ -144,10 +144,10 @@ export const aiResponse = async (message, metadata, resultado_de_consulta) => {
   RESULTADO_DE_CONSULTA: ${JSON.stringify(resultsAbstract)}
   `;
 
-    const aiResult = await model.generateContent(request);
+    const aiResult = await model.generateContentStream(request);
     return {
       success: true,
-      data: aiResult.response.text(),
+      data: aiResult.stream,
     };
   } catch (error) {
     console.error("Fallo en la generacion de mensaje por parte de la IA", error);

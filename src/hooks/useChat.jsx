@@ -6,34 +6,49 @@ export function useChat() {
   const [error, setError] = useState(null);
   const [status, setStatus] = useState({step: "idle"});
   const [result, setResult] = useState(null);
+  const [chatLoading, setLoading] = useState(false);
 
   const sendMessage = (text) => {
-    setMessages((prev) => [...prev,{ text, type: "USER" }]);
-    setMessages((prev) => [...prev,{ text: "", type: "AI" }]);
-
+    setMessages((prev) => [...prev,{ text, type: "USER" }, { text: "", type: "AI" }]);
+    setLoading(true);
+    
     send_request(text, {
       onChunk: (chunkText) =>{
+        setLoading(false);
         setMessages((prev) => {
           const update = [...prev];
+          if(update[update.length - 1]?.type === "SERVER_STATUS")
+            update.pop();
           const last = update[update.length - 1];
-          update[update.length-1] = {...last, text: last.text + chunkText};
+          if(last.type === "AI")
+            update[update.length-1] = {...last, text: last.text + chunkText};
           return update;
         });
       },
       onStatus: (step) =>{
-        setStatus(step);
-        const aiMessage = { text: step, type: "AI" };
-        setMessages((prev) => [...prev, aiMessage]);
+        setStatus({step: step});
+        setMessages((prev) => {
+          const last = prev[prev.length - 1];
+          if(last?.type === "SERVER_STATUS")
+            return [...prev.slice(0, -1),  {text: step, type: "SERVER_STATUS"}];
+          return [...prev, {text: step, type: "SERVER_STATUS"}];
+        });
       },
-      onError: (errStep) => {
-        setError(errStep);
-        setStatus(errStep);
-        const aiMessage = { text: errStep, type: "AI" };
-        setMessages((prev) => [...prev, aiMessage]);
+      onError: (step) =>{
+        setError(step);
+        setStatus({step: step});
+        setLoading(false);
+        setMessages((prev) => {
+          const last = prev[prev.length - 1];
+          if(last?.type === "SERVER_STATUS")
+            return [...prev.slice(0, -1),  {text: step, type: "SERVER_STATUS"}];
+          return [...prev, {text: step, type: "SERVER_STATUS"}];
+        });
       },
-      onResult: (result) => {
-        setResult(result);
-        setStatus({step: "Success"}); //Remember to use this result inside a card in the front end
+      onResult: (data) => {
+        setResult(data);
+        setStatus({step: "Success"});
+        setLoading(false);
       }
     });
   };
@@ -42,5 +57,8 @@ export function useChat() {
     messages,
     sendMessage,
     error,
+    status,
+    result,
+    chatLoading,
   };
 }

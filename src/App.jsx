@@ -21,7 +21,7 @@ export default function App() {
     await sendMessage(text);
   };
 
-  if (chatLoading || authLoading) {
+  if (authLoading) {
     return (
       <div className="flex flex-col justify-center items-center w-dvw h-dvh bg-zinc-950">
         <h1 className="text-indigo-100 text-2xl">Cargando...</h1>

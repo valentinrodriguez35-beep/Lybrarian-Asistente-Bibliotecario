@@ -31,7 +31,7 @@ app.get("/chat/stream", async (req, res) => {
     //Pipeline of functions
     //1.- Extraction of parameters
     sendEvent(res, "status", {step: "Extracting"});
-    const ai_metadata = await generate_metadata(message_body);
+    const ai_metadata = await generate_metadata(message_body, res);
     if(ai_metadata.error){
       sendEvent(res, "status", {step: "Extracting Failure"});
       return res.end();
@@ -45,19 +45,21 @@ app.get("/chat/stream", async (req, res) => {
     }
     //3.- Creating response
     sendEvent(res, "status", {step: "Responding"});
-    const ai_response = await generate_response(message_body, ai_metadata.response, koha_request.response)
+    const ai_response = await generate_response(message_body, ai_metadata.response, koha_request.response, res)
     if(ai_response.error){
       sendEvent(res, "status", {step: "Responding Failure"});
       return res.end();
     }
     //4.- Streaming Response by Chunks
     sendEvent(res, "status", {step: "Streaming Response"});
+    console.log("data:", ai_response.response.data);
+    console.log("is iterable:", ai_response.response.data?.[Symbol.asyncIterator]);
     for await (const chunk of ai_response.response.data){
       const streamed_chunk = chunk.text();
       console.log(streamed_chunk);  //Debugging Streaming [DELETE LATER]
       sendEvent(res, "chunk", {text: streamed_chunk});
     }
-    sendEvent(res, "status", {step: "Succeded"});
+    sendEvent(res, "status", {step: "Success"});
     sendEvent(res, "result", {response: koha_request.response});
     return res.end();  //End Streaming
   }catch(error){

@@ -213,7 +213,7 @@ const books = [
 ];
 
 app.get("/api/v1/biblios/search", (req, res) => {
-  const { q, author, isbn, biblionumber } = req.query;
+  const { q, author, isbn, biblionumber, location } = req.query;
 
   let results = books;
 
@@ -233,7 +233,9 @@ app.get("/api/v1/biblios/search", (req, res) => {
   if (isbn) {
     results = results.filter((b) => b.isbn === isbn);
   }
-
+  if (location) {
+    results = results.filter((b) => b.location.toLowerCase().includes(location.toLowerCase()));
+  }
   return res.json({ total: results.length, results });
 });
 

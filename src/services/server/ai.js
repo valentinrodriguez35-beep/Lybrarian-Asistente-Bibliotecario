@@ -1,6 +1,6 @@
 import { assistantRequest, aiResponse} from "./api/assistant/ai_logic.js";
 
-export async function generate_metadata(message){
+export async function generate_metadata(message, res){
     if(!message){
         return{
             response: "Message is missing",
@@ -8,7 +8,7 @@ export async function generate_metadata(message){
             status: 400,
         }
     }
-    const metadata = await assistantRequest(message);
+    const metadata = await assistantRequest(message, res);
     if(!metadata.success){
         return{
             response: "AI Failed to generate metadata",
@@ -23,7 +23,7 @@ export async function generate_metadata(message){
     }
 }
 
-export async function generate_response(message, metadata, kohaData){
+export async function generate_response(message, metadata, kohaData, res){
     if(!message || !metadata || !kohaData){
         return{
             response: "Data required for response are empty",
@@ -32,7 +32,7 @@ export async function generate_response(message, metadata, kohaData){
         }
     }
     
-    const result = await aiResponse(message, metadata, kohaData);
+    const result = await aiResponse(message, metadata, kohaData, res);
     if(!result.success){
         return{
             response: "AI Failed to generate response",

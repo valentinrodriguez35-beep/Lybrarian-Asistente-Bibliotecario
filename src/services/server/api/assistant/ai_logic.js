@@ -90,7 +90,7 @@ export async function assistantRequest(message) {
   }
 }
 
-export const aiResponse = async (message, metadata, resultado_de_consulta) => {
+export const aiResponse = async (message, metadata, resultado_de_consulta, res) => {
   //Limit the results to five coincidences
   const results = Array.isArray(resultado_de_consulta) ? resultado_de_consulta : (resultado_de_consulta?.results || []);
 

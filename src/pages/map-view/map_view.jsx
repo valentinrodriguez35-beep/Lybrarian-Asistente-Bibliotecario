@@ -1,5 +1,3 @@
-import React from "react";
-import styles from "./map_view.module.css";
 import InteractiveMap from "../../components/interactiveMap/interactiveMap";
 import MapArticles from "../../components/mapArticles/MapArticles";
 import ViewLayout from "../../components/layouts/ViewLayout";

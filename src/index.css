@@ -20,13 +20,13 @@
     @apply text-[#899db8] transition-colors duration-300 ease-in hover:text-gray-100 focus:text-gray-100;
   }
   .message-focus {
-    @apply focus-within:drop-shadow-[0_0_2px_#60A5FA] ease-in duration-200;
+    @apply focus-within:drop-shadow-[0_0_1px_#c0caf5] ease-in duration-200;
   }
   .logo-effect {
     @apply drop-shadow-[0_0_5px_#60A5FA] hover:drop-shadow-[0_0_20px_#60A5FA] ease-in-out duration-1000;
   }
   .input-focus {
-    @apply border-[#272a2e] transition-colors duration-300 ease-in focus:border-[#637aaa] focus:outline-none;
+    @apply border-[#272a2e] transition-colors duration-300 ease-in focus:border-[#252d3f] focus:outline-none;
   }
   .google-focus {
     @apply border border-zinc-900;
@@ -41,11 +41,11 @@
   }
 
   .abierto_marker {
-    @apply bg-emerald-500;
+    @apply bg-[#34D399];
   }
 
   .cerrado_marker {
-    @apply bg-red-500;
+    @apply bg-[#FF3366];
   }
 }
 
@@ -59,25 +59,24 @@
 
 /*---> GLOBAL <---*/
 @theme {
-  --sb-button-iddle: #66718a;
-  --background-home: #000000;
-  --background-chat: #0a0a0a;
-  --sidebar-color: #0e0e0e;
+  --sb-button-iddle: #545c7e;
+  --background-home: #0A0A0F;
+  --sidebar-color: #11111A;
   --boton-icono: #d9d9d9;
   --boton-icono_pressed: #ffffff;
   --boton-bg-hover: #272a2d;
   --boton-bg-pressed: #637aaa;
   --boton-bg-pressed_innershadow: #393d41;
-  --info-tarjeta-color: #1c1c24;
+  --info-tarjeta-color: #11111A;
   --info-tarjeta-pressed: #3a3a4a;
   --info-tarjeta-hover: #26262f;
   --mapa-sidebar-color: #0b0c0c;
   --mapa-boton-disponible: #86ff7b;
   --mapa-boton-noDisponible: #ff7b7b;
-  --user-mensaje: #1f5087;
+  --user-mensaje: #15161e;
   --ai-mensaje: #272b30;
-  --caja-mensaje: #141517;
-  --caja-mensaje-borderHover: var(--boton-bg-pressed);
+  --caja-mensaje: #15161e;
+  --caja-mensaje-borderHover: #252d3f;
 }
 
 body {

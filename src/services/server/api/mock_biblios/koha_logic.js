@@ -19,6 +19,7 @@ const books = [
     location: "Biblioteca Central Tijuana",
     total_items: 2,
     available: 1,
+    theme: "fantasía épica magia sanderson",
   },
   {
     biblionumber: "1002",
@@ -29,6 +30,7 @@ const books = [
     location: "Biblioteca Central Tijuana",
     total_items: 1,
     available: 1,
+    theme: "fantasía magia música rothfuss Kvothe",
   },
   {
     biblionumber: "1003",
@@ -39,6 +41,7 @@ const books = [
     location: "Biblioteca Central Tijuana",
     total_items: 2,
     available: 0,
+    theme: "realismo mágico novela clásica literatura garcía márquez buendía macondo",
   },
   {
     biblionumber: "1004",
@@ -49,6 +52,7 @@ const books = [
     location: "Biblioteca Central Tijuana",
     total_items: 1,
     available: 1,
+    theme: "distopía ciencia ficción política orwell totalitarismo gran hermano",
   },
   {
     biblionumber: "1005",
@@ -59,6 +63,7 @@ const books = [
     location: "Biblioteca Central Mexicali",
     total_items: 3,
     available: 2,
+    theme: "ciencia ficción espacio imperio desierto paul atreides frank herbert spice",
   },
   {
     biblionumber: "1006",
@@ -69,6 +74,7 @@ const books = [
     location: "Biblioteca Central Tijuana",
     total_items: 4,
     available: 2,
+    theme: "fantasía épica aventura anillo frodo tolkien",
   },
   {
     biblionumber: "1007",
@@ -79,6 +85,7 @@ const books = [
     location: "Biblioteca Central Mexicali",
     total_items: 5,
     available: 3,
+    theme: "fantasía magia escuela magos hogwarts harry potter rowling",
   },
   {
     biblionumber: "1008",
@@ -89,6 +96,7 @@ const books = [
     location: "Biblioteca Valle Dorado",
     total_items: 2,
     available: 1,
+    theme: "distopía ciencia ficción libros fuego ray bradbury montag",
   },
   {
     biblionumber: "1009",
@@ -99,6 +107,7 @@ const books = [
     location: "Biblioteca Valle Dorado",
     total_items: 1,
     available: 0,
+    theme: "novela clásica psicología crimen castigo clásica raskolnikov dostoievski",
   },
   {
     biblionumber: "1010",
@@ -109,6 +118,7 @@ const books = [
     location: "Biblioteca Central Tijuana",
     total_items: 6,
     available: 4,
+    theme: "infantil filosofía clásica principito rosa exupery",
   },
   {
     biblionumber: "1011",
@@ -119,6 +129,7 @@ const books = [
     location: "Biblioteca Valle Dorado",
     total_items: 3,
     available: 1,
+    theme: "novela caballería clásica quijote sancho panza miguel cervantes",
   },
   {
     biblionumber: "1012",
@@ -129,6 +140,7 @@ const books = [
     location: "Biblioteca Central Mexicali",
     total_items: 2,
     available: 2,
+    theme: "historia antropología evolución ciencia harari",
   },
   {
     biblionumber: "1013",
@@ -139,6 +151,7 @@ const books = [
     location: "Biblioteca Central Tijuana",
     total_items: 3,
     available: 0,
+    theme: "misterio suspenso religión código da vinci brown",
   },
   {
     biblionumber: "1014",
@@ -149,6 +162,7 @@ const books = [
     location: "Biblioteca Valle Dorado",
     total_items: 2,
     available: 1,
+    theme: "romance novela clásica elizabeth darcy jane austen",
   },
   {
     biblionumber: "1015",
@@ -159,6 +173,7 @@ const books = [
     location: "Biblioteca Central Tijuana",
     total_items: 4,
     available: 3,
+    theme: "filosofía autoayuda novela clásica alquimista paulo coelho",
   },
   {
     biblionumber: "1016",
@@ -169,6 +184,7 @@ const books = [
     location: "Biblioteca Valle Dorado",
     total_items: 1,
     available: 1,
+    theme: "cuentos filosofía literatura clásica ficciones borge borges",
   },
   {
     biblionumber: "1017",
@@ -179,6 +195,7 @@ const books = [
     location: "Biblioteca Central Mexicali",
     total_items: 2,
     available: 1,
+    theme: "ciencia ficción espacio guerra militar ender card",
   },
   {
     biblionumber: "1018",
@@ -189,6 +206,7 @@ const books = [
     location: "Biblioteca Central Mexicali",
     total_items: 1,
     available: 0,
+    theme: "ciencia ficción cyberpunk tecnología hack neuromante gibson case",
   },
   {
     biblionumber: "1019",
@@ -199,6 +217,7 @@ const books = [
     location: "Biblioteca Valle Dorado",
     total_items: 2,
     available: 2,
+    theme: "novela drama historia esclavitud fantasmas beloved morrison",
   },
   {
     biblionumber: "1020",
@@ -209,11 +228,12 @@ const books = [
     location: "Biblioteca Central Tijuana",
     total_items: 3,
     available: 2,
+    theme: "realismo mágico fantasmas novela pedro páramo juan rulfo comala",
   },
 ];
 
 app.get("/api/v1/biblios/search", (req, res) => {
-  const { q, author, isbn, biblionumber, location } = req.query;
+  const { q, author, isbn, biblionumber, location, theme } = req.query;
 
   let results = books;
 
@@ -221,13 +241,16 @@ app.get("/api/v1/biblios/search", (req, res) => {
     results = results.filter((b) => b.biblionumber === biblionumber);
   }
   if (q) {
+    const query = q.toLowerCase();
     results = results.filter((b) =>
-      b.title.toLowerCase().includes(q.toLowerCase()),
+      b.title.toLowerCase().includes(query) ||
+      b.author.toLowerCase().includes(query) ||
+      (b.theme && b.theme.toLowerCase().includes(query))
     );
   }
   if (author) {
     results = results.filter((b) =>
-      b.author.toLowerCase().includes(author.toLowerCase()),
+      b.author.toLowerCase().includes(author.toLowerCase())
     );
   }
   if (isbn) {
@@ -235,6 +258,9 @@ app.get("/api/v1/biblios/search", (req, res) => {
   }
   if (location) {
     results = results.filter((b) => b.location.toLowerCase().includes(location.toLowerCase()));
+  }
+  if (theme) {
+    results = results.filter((b) => b.theme.toLowerCase().includes(theme.toLowerCase()));
   }
   return res.json({ total: results.length, results });
 });

@@ -13,7 +13,7 @@ export default function HomeLogo() {
         </h1>
       </div>
       <h2>
-        <span className="text-gray-200 my-4 text-2xl md:text-4xl text-center font-light animate-fade-in-up animate-duration-500 animate-delay-150">
+        <span className="text-[#E8E8F0] my-4 text-2xl md:text-4xl text-center font-light animate-fade-in-up animate-duration-500 animate-delay-150">
           ¿Qué te gustaría encontrar hoy?
         </span>
       </h2>

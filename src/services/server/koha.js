@@ -16,6 +16,8 @@ export function query_builder(metadata){
     if (metadata.author) params.append("author", metadata.author);
     if (metadata.isbn) params.append("isbn", metadata.isbn);
     if (metadata.id) params.append("biblionumber", metadata.id);
+    if (metadata.location) params.append("location", metadata.location);
+    if (metadata.theme) params.append("theme", metadata.theme);
     return {
         response: params,
         error: false,
@@ -39,26 +41,39 @@ export async function query_request(message_data){
             status: query_params.status,
         }
     }
-    //Fetch request to Koha API (Mocked)
-    const response = await fetch(`${kohaUrl}${query_params}`,
-        {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
+    
+    const targetUrl = `${kohaUrl}${query_params.response}`;
+
+    try {
+        //Fetch request to Koha API (Mocked)
+        const response = await fetch(targetUrl,
+            {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                },
             },
-        },
-    );
-    if(!response.ok){
-        return{
-            response: "Koha API Failed to process request",
-            error: true,
+        );
+        
+        if(!response.ok){
+            return{
+                response: "Koha API Failed to process request",
+                error: true,
+                status: response.status,
+            }
+        }
+        
+        const data = await response.json();
+        return {
+            response: data.results,
+            error: false,
             status: response.status,
         }
-    }
-    const data = await response.json();
-    return {
-        response: data.results,
-        error: false,
-        status: response.status,
+    } catch(err) {
+        return {
+            response: "Network error requesting Koha API",
+            error: true,
+            status: 500,
+        }
     }
 }

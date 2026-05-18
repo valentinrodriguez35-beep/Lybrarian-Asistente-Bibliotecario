@@ -1,8 +1,14 @@
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 import dotenv from "dotenv";
 import { sendEvent } from "../../../eventHandler.js";
-
+import { Ollama } from "ollama";
+import { HeuristicAnalizer } from "./heuristic-extractor.js";
 dotenv.config();
+
+const ollama = new Ollama({
+  host: `${process.env.OLLAMA_URL}` ?? "http://127.0.0.1:11434",
+});
+
 const ai = new GoogleGenerativeAI(process.env.GEMINI_KEY);
 
 const alternative_schema = {
@@ -14,15 +20,36 @@ const alternative_schema = {
         "search_book",
         "check_availability",
         "general_question",
-        "unsupported_request",]
+        "unsupported_request"]
     },
-    title:{type: ["string", "null"]},
-    author:{type: ["string", "null"]},
-    theme:{type: ["string", "null"]},
-    isbn:{type: ["string", "null"]},
-    id:{type: ["string", "null"]},
-    location:{type: ["string", "null"]},
-    is_ambiguous:{type: "boolean"},
+    title:{
+      type: "string",
+      description: "Titulo del material bibliográfico consultado por el usuario",
+    },
+    author:{
+      type: "string",
+      description: "Autor del material bibliográfico consultado por el usuario",
+    },
+    theme:{
+      type: "string",
+      description: "Tema del material bibliografico consultado por el usuario",
+    },
+    isbn:{
+      type: "string",
+      description: "ISBN proveido por el usuario de longitud mayor o igual a 10 digitos",
+    },
+    id:{
+      type: "string",
+      description: "(biblionumber) Identificador del material bibliografico consultado por el usuario",
+    },
+    location:{
+      type: "string",
+      description: "Lugar, Biblioteca o sitio en general consultado por el usuario (Ejemplo: Biblioteca Central Tijuana)",
+    },
+    is_ambiguous:{
+      type: "boolean",
+      description: "TRUE solo si la consulta realizada por el usuario es muy general, de manera que tiene muchas interpretaciones.",
+    },
   },
   required: ["intent", "title", "author", "theme", "isbn", "id", "location", "is_ambiguous"],
 };
@@ -86,13 +113,34 @@ const schema = {
   required: ["intent", "title", "author", "theme", "isbn", "id", "location", "is_ambiguous"],
 };
 
-const schema_prompt = (message) => { return `
-  Extrae información de la siguiente consulta de biblioteca.
-  Responde ÚNICAMENTE con el JSON solicitado, sin texto adicional.
+const schema_prompt = (message) => `
+Eres un extractor de información bibliográfica.
 
-  ### CONSULTA A PROCESAR
-  ${message}
-`};
+Tu tarea es analizar la consulta del usuario y devolver EXCLUSIVAMENTE un JSON válido.
+
+REGLAS OBLIGATORIAS:
+- NO expliques nada
+- NO agregues texto fuera del JSON
+- TODOS los campos deben existir
+- Usa null si el dato NO fue mencionado explícitamente por el usuario
+- NUNCA inventes ni asumas información que no esté en la consulta
+
+CRITERIOS:
+- title = nombre del libro mencionado literalmente. Si no se menciona → null
+- author = autor mencionado literalmente. Si no se menciona → null
+- theme = tema solicitado literalmente. Si no se menciona → null
+- isbn = ISBN numérico provisto. Si no se provee → null
+- id = identificador bibliográfico provisto. Si no se provee → null
+- location = biblioteca o lugar mencionado literalmente. Si no se menciona → null
+- is_ambiguous = true solo si la consulta es demasiado general
+
+EJEMPLO:
+Consulta: "¿Tienen el libro Dune?"
+Respuesta correcta: {"intent":"check_availability","title":"Dune","author":null,"theme":null,"isbn":null,"id":null,"location":null,"is_ambiguous":false}
+
+CONSULTA:
+"${message}"
+`;
 
 const request = (message, metadata, resultsAbstract) => { return `
   Eres un bibliotecario virtual. Respondes siempre en español, formato Markdown, tono formal y amable.
@@ -116,80 +164,49 @@ const request = (message, metadata, resultsAbstract) => { return `
 }
 
 const alternative_model = async (prompt, res) => {
-  const model = await fetch("http://localhost:11434/api/generate",{
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
+  try{
+    const response = await ollama.chat({
       model: process.env.CUSTOM_MODEL ?? process.env.OLLAMA_MODEL ?? "lybrarian-assistant",
-      prompt: prompt,
-      stream: false,
+      messages: [{ role: "user", content: prompt}],
       format: alternative_schema,
       options: {
-        think: false,
         repeat_penalty: 1.3,
-        temperature: 0.1,
+        temperature: 0.05,
         num_predict: 500,
       }
-    })
-  });
+    })    
+    const parsedData = JSON.parse(response.message.content);
+    const validatedData = HeuristicAnalizer(parsedData);
+    if(!validatedData.success)
+      throw new Error("Fallo en validacion de metadata generada por IA: ", validatedData.error.format());
 
-  if(!model.ok){
-    sendEvent(res, "status", { step: "Alternative Failure"});
+    return validatedData;
+  }catch(error){
+    sendEvent(res, "status", { step: "Alternative Failure" });
     throw new Error("Modelo Alternativo ha fallado");
   }
-  const data = await model.json();
-  return JSON.parse(data.response);
 };
 
 const alternative_model_stream = async function* (prompt, res){
-    const model = await fetch("http://localhost:11434/api/generate",{
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
+  try{
+    const response = await ollama.chat({
       model: process.env.CUSTOM_MODEL ?? process.env.OLLAMA_MODEL ?? "lybrarian-assistant",
-      prompt: prompt,
+      messages: [{ role: "user", content: prompt}],
       stream: true,
       options: {
-        think: false,
         repeat_penalty: 1.3,
         temperature: 0.7,
         num_predict: 500,
       }
     })
-  });
-
-  if(!model.ok){
+    for await (const chunk of response){
+      if(chunk.message?.content){
+        yield { text: () => chunk.message?.content };
+      }
+    }
+  }catch(error){
     sendEvent(res, "status", { step: "Alternative Failure"});
     throw new Error("Modelo Alternativo ha fallado");
-  }
-
-  const reader = model.body.getReader();
-  const decoder = new TextDecoder();
-  let buffer = "";
-
-  while(true){
-    const {done, value} = await reader.read();
-    if(done) 
-      break;
-
-    buffer += decoder.decode(value, {stream: true});
-    let boundary = buffer.indexOf("\n");
-
-    while(boundary !== -1){
-      const line = buffer.slice(0, boundary).trim();
-      buffer = buffer.slice(boundary + 1);
-      if(line){
-        try{
-          const json = JSON.parse(line);
-          if(json.response){
-            yield { text: () => json.response };
-          }
-        }catch(e){
-          console.error("Error: ",e);
-        }
-      }
-      boundary = buffer.indexOf("\n");
-    }
   }
 };
 
@@ -259,18 +276,11 @@ export const aiResponse = async (message, metadata, resultado_de_consulta, res) 
     };
   } catch (error) {
     console.error("Error con inteligencia artificial: ", error);
-    try{
-      sendEvent(res, "status", {step: "Changing Model"});
-      const ollamaResult = alternative_model_stream(request(message, metadata, resultsAbstract),res);
-      return {
-        data: ollamaResult,
-        success: true,
-      };
-    }catch(error){
-      return {
-        error: error.message,
-        success: false,
-      };
-    }
+    sendEvent(res, "status", {step: "Changing Model"});
+    const ollamaStream = alternative_model_stream(request(message, metadata, resultsAbstract),res);
+    return {
+      data: ollamaStream,
+      success: true,
+    };
   }
 };

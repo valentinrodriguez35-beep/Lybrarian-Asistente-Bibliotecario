@@ -20,8 +20,11 @@ export function useChat() {
           if(update[update.length - 1]?.type === "SERVER_STATUS")
             update.pop();
           const last = update[update.length - 1];
-          if(last.type === "AI")
-            update[update.length-1] = {...last, text: last.text + chunkText};
+          if(last && last.type === "AI"){
+            const safeText = last.text || "";
+            const safeChunk = chunkText || "";
+            update[update.length-1] = {...last, text: safeText + safeChunk};
+          }
           return update;
         });
       },

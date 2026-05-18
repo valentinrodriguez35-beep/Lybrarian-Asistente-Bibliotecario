@@ -52,15 +52,12 @@ app.get("/chat/stream", async (req, res) => {
     }
     //4.- Streaming Response by Chunks
     sendEvent(res, "status", {step: "Streaming Response"});
-    console.log("data:", ai_response.response.data);
-    console.log("is iterable:", ai_response.response.data?.[Symbol.asyncIterator]);
     for await (const chunk of ai_response.response.data){
       const streamed_chunk = chunk.text();
-      console.log(streamed_chunk);  //Debugging Streaming [DELETE LATER]
       sendEvent(res, "chunk", {text: streamed_chunk});
     }
     sendEvent(res, "status", {step: "Success"});
-    sendEvent(res, "result", {response: koha_request.response});
+    sendEvent(res, "result", {item: koha_request.response});
     return res.end();  //End Streaming
   }catch(error){
     sendEvent(res, "status", {step: "Critical Failure"});

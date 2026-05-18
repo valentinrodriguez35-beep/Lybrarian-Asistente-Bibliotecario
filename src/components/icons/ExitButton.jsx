@@ -3,8 +3,8 @@ import React from "react";
 export default function ExitButton({ fill_col = "white" }) {
   return (
     <svg
-      width="35px"
-      height="35px"
+      width="32px"
+      height="32px"
       viewBox="0 0 30 30"
       xmlns="http://www.w3.org/2000/svg"
       className={fill_col}

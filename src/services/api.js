@@ -21,10 +21,6 @@ export async function send_request(message, {onChunk, onError, onStatus, onResul
       onError(error);
       event_source.close();
     }
-    else if(step === "Success"){
-      onStatus(step);
-      event_source.close();
-    }
     else if(step === "Changing Model"){
       onStatus(SERVER_STATUS[step] ?? step)
     }
@@ -35,7 +31,6 @@ export async function send_request(message, {onChunk, onError, onStatus, onResul
 
   event_source.addEventListener("chunk", (event) =>{
     const {text} = JSON.parse(event.data) || {text: " "};
-    console.log(text);
     onChunk(text);
   });
 
@@ -43,5 +38,6 @@ export async function send_request(message, {onChunk, onError, onStatus, onResul
     const {item} = JSON.parse(event.data) || {item: " "};
     console.log(item);
     onResult(item);
+    event_source.close();
   });
 }

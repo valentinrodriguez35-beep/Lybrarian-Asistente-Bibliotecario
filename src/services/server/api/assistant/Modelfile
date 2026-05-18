@@ -1,8 +1,9 @@
-FROM qwen3.5:4b-q4_K_M
+FROM gemma3:4b
 PARAMETER num_ctx 4096
 PARAMETER num_gpu 99
 PARAMETER repeat_penalty 1.3
-PARAMETER temperature 0.7
+PARAMETER presence_penalty 1.0
+PARAMETER temperature 0.1
 PARAMETER num_predict 500
 SYSTEM "Prohibido pensar. No uses la etiqueta <think>. Responde directamente a la pregunta del usuario de forma inmediata, clara y concisa."
 #run these commands on terminal inside the ./assistant directory where the Modelfile lives

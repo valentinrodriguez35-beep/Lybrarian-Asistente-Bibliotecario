@@ -1,6 +1,6 @@
 import { generate_metadata, generate_response } from "./ai.js";
 import { query_request } from "./koha.js";
-import { sendEvent } from "../eventHandler.js";
+import { sendEvent } from "../server/eventHandler.js";
 import express from "express";
 import logger from "morgan";
 import cors from "cors";

@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 import dotenv from "dotenv";
-import { sendEvent } from "../../../eventHandler.js";
+import { sendEvent } from "../../eventHandler.js";
 import { Ollama } from "ollama";
 import { HeuristicAnalizer } from "./heuristic-extractor.js";
 dotenv.config();
@@ -32,7 +32,7 @@ const alternative_schema = {
     },
     theme:{
       type: "string",
-      description: "Tema del material bibliografico consultado por el usuario",
+      description: "Tema, género literario, materia o conceptos asociados al contenido buscado (ej: tecnología, computación, astronomía, ciencia, terror, miedo, fantasía, magia, clásica, etc.). Debe inferirse del contexto si el usuario menciona palabras clave relacionadas.",
     },
     isbn:{
       type: "string",
@@ -84,7 +84,7 @@ const schema = {
     theme: {
       type: SchemaType.STRING,
       nullable: true,
-      description: "Tema del material bibliografico consultado por el usuario",
+      description: "Tema, género literario, materia o conceptos asociados al contenido buscado (ej: tecnología, computación, astronomía, ciencia, terror, miedo, fantasía, magia, clásica, etc.). Debe inferirse del contexto si el usuario menciona palabras clave relacionadas.",
     },
     isbn: {
       type: SchemaType.STRING,
@@ -128,7 +128,7 @@ REGLAS OBLIGATORIAS:
 CRITERIOS:
 - title = nombre del libro mencionado literalmente. Si no se menciona → null
 - author = autor mencionado literalmente. Si no se menciona → null
-- theme = tema solicitado literalmente. Si no se menciona → null
+- theme = tema, género, materia o conceptos asociados que definan la categoría de búsqueda (por ejemplo, si menciona 'computadoras' o 'programación' el tema es 'tecnología'; si menciona 'estrellas' o 'planetas' es 'astronomía'; si menciona 'miedo' o 'fantasmas' es 'terror'; si menciona 'magia' o 'dragones' es 'fantasía'; si menciona 'canción' o 'instrumentos' es 'música'). Si no hay ningún tema o concepto → null
 - isbn = ISBN numérico provisto. Si no se provee → null
 - id = identificador bibliográfico provisto. Si no se provee → null
 - location = biblioteca o lugar mencionado literalmente. Si no se menciona → null
@@ -220,6 +220,7 @@ export async function assistantRequest(message, res) {
   try {
     const model = await ai.getGenerativeModel({
       model: "gemini-2.5-flash",
+      systemInstruction: "Eres un extractor de información bibliográfica y de intenciones. Tu tarea es analizar la consulta del usuario y extraer los datos requeridos. Para el campo 'theme' (tema), debes identificar temas, materias, géneros literarios o conceptos clave (como 'magia', 'física', 'computadoras', 'fantasmas') e inferir el tema o género correspondiente (fantasía, ciencia, tecnología, terror, etc.).",
       generationConfig: {
         responseMimeType: "application/json",
         responseSchema: schema,
@@ -234,12 +235,11 @@ export async function assistantRequest(message, res) {
       data: dataResponse,
     };
   } catch (error) {
-    console.error("Error con inteligencia artificial: ", error);
     try{
       sendEvent(res, "status", {step: "Changing Model"});
       const result = await alternative_model(schema_prompt(message), res);
       return {
-        data: result, 
+        data: result.data, 
         success: true,
       };
     }catch(error){

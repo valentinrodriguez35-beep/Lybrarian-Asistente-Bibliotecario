@@ -1,6 +1,7 @@
 import MessageInput from "../../components/ui/MessageInput/MessageInput";
-import ViewLayout from "../../components/layouts/ViewLayout";
 import HeaderResponsive from "../../components/ui/HeaderResponsive";
+import SuggestionChip from "../../components/utils/SuggestionChip";
+import ViewLayout from "../../components/layouts/ViewLayout";
 import { HomeLogo } from "../../components/icons";
 
 export default function HomeView({ onSend }) {
@@ -12,8 +13,13 @@ export default function HomeView({ onSend }) {
       <div className="flex flex-1 w-full max-w-3xl self-center justify-center lg:flex-none">
         <HomeLogo />
       </div>
-      <div className="flex w-full max-w-3xl self-center">
-        <MessageInput onSend={onSend} />
+      <div className="flex flex-col gap-4">
+        <div className="flex w-full max-w-3xl self-center">
+          <MessageInput onSend={onSend} />
+        </div>
+        <div className="flex w-full max-w-2xl self-center justify-center">
+          <SuggestionChip onSelect = {onSend}/>
+        </div>
       </div>
     </ViewLayout>
   );

@@ -1,5 +1,6 @@
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
 import StepsShimmer from "../utils/StepsShimmer";
 
 export default function messageBubble({ text, type }) {
@@ -19,10 +20,10 @@ export default function messageBubble({ text, type }) {
   return (
     <article
       className={`flex flex-col h-fit max-w-[85%] lg:max-w-[70%] rounded-2xl px-4 py-2 
-        ${isAI ? "self-start rounded-tl-none bg-transparent overflow-hidden wrap-break-word" : "self-end rounded-tr-none bg-(--user-mensaje)"}`}
+        ${isAI ? "self-start rounded-tl-none bg-transparent overflow-hidden" : "self-end rounded-tr-none bg-(--user-mensaje)"}`}
     >
-      <div className="text-left font-normal wrap-break-word text-zinc-200 mb-2">
-        <Markdown remarkPlugins={[remarkGfm]}>{text}</Markdown>
+      <div className="text-left font-normal text-zinc-200 mb-2">
+        <Markdown remarkPlugins={[remarkGfm, remarkBreaks]}>{text}</Markdown>
       </div>
     </article>
   );

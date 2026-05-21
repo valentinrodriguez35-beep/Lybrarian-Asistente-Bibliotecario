@@ -230,33 +230,19 @@ const books = [
     available: 2,
     theme: "realismo mágico fantasmas novela pedro páramo juan rulfo comala",
   },
-  {
-    biblionumber: "1021",
-    title: "El principito",
-    author: "Antoine de Saint-Exupéry",
-    isbn: "9788498381498",
-    year: 1943,
-    location: "Biblioteca Central Tijuana",
-    total_items: 6,
-    available: 4,
-    theme: "infantil filosofía clásica principito rosa exupery",
-  },
 ];
 
 app.get("/api/v1/biblios/search", (req, res) => {
-  const { q, author, isbn, biblionumber, location, theme } = req.query;
-
+  const { title, author, isbn, biblionumber, location, theme } = req.query;
+  console.log("Koha mock query:", req.query);
   let results = books;
 
   if (biblionumber) {
     results = results.filter((b) => b.biblionumber === biblionumber);
   }
-  if (q) {
-    const query = q.toLowerCase();
+  if (title) {
     results = results.filter((b) =>
-      b.title.toLowerCase().includes(query) ||
-      b.author.toLowerCase().includes(query) ||
-      (b.theme && b.theme.toLowerCase().includes(query))
+      b.title.toLowerCase().includes(title.toLowerCase())
     );
   }
   if (author) {

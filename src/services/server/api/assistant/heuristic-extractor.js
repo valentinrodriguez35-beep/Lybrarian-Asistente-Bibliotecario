@@ -1,6 +1,6 @@
 import {z} from "zod";
 
-const nullify = z.string().transform(v => v === "null" ? null : v).nullable().catch(null);
+const nullify = z.string().transform(v => v.toLocaleLowerCase() === "null" ? null : v).nullable().catch(null);
 
 const MetadataSchema = z.object({
     intent: z.enum(["search_book", "check_availability", "general_question"]).catch("unsupported_request"),

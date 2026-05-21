@@ -1,4 +1,5 @@
 import MessageBubble from "../../components/messageBubble/messageBubble";
+import { CardResult } from "../../components/utils/CardResult";
 import ViewLayout from "../../components/layouts/ViewLayout";
 import MessagesContainer from "./Messages_Container/MessagesContainer";
 import MessageInput from "../../components/ui/MessageInput/MessageInput";
@@ -22,9 +23,12 @@ export default function ChatView({ messages, onSend }) {
       overflow-y-auto no-scrollbar scroll-smooth gradient-container"
       >
         <MessagesContainer>
-          {messages.map((msg, index) => (
-            <MessageBubble text={msg.text} type={msg.type} key={index} />
-          ))}
+          {messages.map((msg, index) => {
+            if (msg.type === "CARD") {
+              return <CardResult items={msg.items} key={index} />;
+            }
+            return <MessageBubble text={msg.text} type={msg.type} key={index} />;
+          })}
         </MessagesContainer>
       </div>
       <div className="flex flex-col items-center py-4 h-auto w-full">

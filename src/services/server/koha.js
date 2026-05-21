@@ -11,13 +11,15 @@ export function query_builder(metadata){
     //Receive Metada extracted from the AI
     //Then, use it to build the URL for the query to Koha's MOCKED API
     const params = new URLSearchParams();
+    /*
     const search_terms = [metadata.title, metadata.theme].filter(Boolean).join(" ");
-    if (search_terms) params.append("q", search_terms);
+    if (search_terms) params.append("q", search_terms);*/
+    if (metadata.title) params.append("title", metadata.title);
+    if (metadata.theme) params.append("theme", metadata.theme);
     if (metadata.author) params.append("author", metadata.author);
     if (metadata.isbn) params.append("isbn", metadata.isbn);
     if (metadata.id) params.append("biblionumber", metadata.id);
     if (metadata.location) params.append("location", metadata.location);
-    if (metadata.theme) params.append("theme", metadata.theme);
     return {
         response: params,
         error: false,
@@ -33,6 +35,7 @@ export async function query_request(message_data){
             status: 400,
         }
     }
+    console.log("query_request received:", message_data);
     const query_params = query_builder(message_data);
     if(query_params.error){
         return{

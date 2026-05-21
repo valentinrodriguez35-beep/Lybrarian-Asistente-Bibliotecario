@@ -19,7 +19,7 @@ export default function messageBubble({ text, type }) {
 
   return (
     <article
-      className={`flex flex-col h-fit max-w-[85%] lg:max-w-[70%] rounded-2xl px-4 py-2 
+      className={`flex flex-col h-fit max-w-[85%] lg:max-w-[70%] rounded-2xl px-4 py-2
         ${isAI ? "self-start rounded-tl-none bg-transparent overflow-hidden" : "self-end rounded-tr-none bg-(--user-mensaje)"}`}
     >
       <div className="text-left font-normal text-zinc-200 mb-2">

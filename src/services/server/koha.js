@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+dotenv.config();
+
+// eslint-disable-next-line no-undef
 const kohaUrl = process.env.KOHA_API_URL ?? "http://localhost:4000/api/v1/biblios/search?"
 
 export function query_builder(metadata){

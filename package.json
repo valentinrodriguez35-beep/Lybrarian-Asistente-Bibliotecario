@@ -9,11 +9,15 @@
     "mock": "node --watch src/services/server/api/mock_biblios/koha_logic.js",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest --coverage --run",
+    "performance": "k6 run src/test/performance.js"
   },
   "dependencies": {
     "@google/genai": "^1.52.0",
     "@google/generative-ai": "^0.24.1",
+    "@opentelemetry/api": "^1.9.1",
+    "@opentelemetry/auto-instrumentations-node": "^0.80.0",
     "@supabase/supabase-js": "^2.101.1",
     "@tailwindcss/vite": "^4.2.2",
     "cors": "^2.8.6",
@@ -39,11 +43,14 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/coverage-v8": "^5.0.2",
+    "@vitest/ui": "^5.0.2",
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
     "tailwind-scrollbar": "^4.0.2",
-    "vite": "^8.0.1"
+    "vite": "^8.0.1",
+    "vitest": "^5.0.2"
   }
 }
